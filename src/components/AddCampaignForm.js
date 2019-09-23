@@ -104,7 +104,7 @@ export default withFormik({
 			.post("https://reqres.in/api/users", values)
 			.then(res => {
 				setStatus(res.data);
-				console.log(res);
+				console.log(res.data);
 				resetForm();
 				setSubmitting(false);
 			})

@@ -1,5 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import PrivateRoute from './utils/PrivateRoute';
+
+// Components
+import NavBar from './components/NavBar';
+
 import './App.css';
 import {FormikNewUserForm} from './components/SignUpForm'
 import {FormikSignInForm} from './components/SignInForm'
@@ -7,25 +12,24 @@ import {FormikSignInForm} from './components/SignInForm'
 
 function App() {
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      
-      <Route path='/sign_up' component={FormikNewUserForm}/>
-      <Route path='/sign_in' component={FormikSignInForm}/>
-    </div>
+    <>
+      <Router>
+        <div className="App">
+          <NavBar />
+          <Switch>
+            {/*public routes*/}
+            <Route path='/login' component={FormikSignInForm}/>
+            <Route path='/signup' component={FormikNewUserForm}/>
+            {/*private routes*/}
+            <PrivateRoute exact path='/dashboard' />
+            <PrivateRoute exact path='/dashboard/campaignform' />
+
+            {/*default*/}
+            <Redirect from='/' to='/dashboard' />
+          </Switch>          
+        </div>
+      </Router>
+    </>
   );
 }
 

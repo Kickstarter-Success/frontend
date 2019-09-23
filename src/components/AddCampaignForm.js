@@ -105,13 +105,11 @@ export default withFormik({
 			.then(res => {
 				setStatus(res.data);
 				console.log(res);
-				console.log('hello');
 				resetForm();
 				setSubmitting(false);
 			})
 			.catch(err => {
 				console.log(err);
-				console.log('bye');
 				setSubmitting(false);
 			});
 	}

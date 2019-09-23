@@ -3,17 +3,38 @@ import axios from 'axios'
 import * as Yup from 'yup'
 import {withFormik, Form, Field} from 'formik'
 import {Link} from 'react-router-dom'
+import styled from 'styled-components'
 
-const NewUserForm = ({valules, errors, touched, status}) => {
+const Card = styled.div`
+display: flex;
+flex-direction: column;
+justify-center: center;
+align-content: center;
+align-items: center;
+margin: 10% auto;
+`
+
+const NewUserForm = ({values, errors, touched, status}) => {
     // const [user, setUser] = 
+    const [user, setUser]= useState([])
+    useEffect(() => {
+        if (status) {
+          setUser([...user, status]);
+        }
+      }, [status]);
+
     return(
         <div>
             <Form>
-                <Field type='text' name='username' placeholder='username'/>
-                <Field type='password' name='password' placeholder='password'/>
-                <button type='submit'>Sign Up</button>
-                <p>Already Have an Account?</p>
-                <Link>Sign In!</Link>
+                <Card>
+                    <Field type='text' name='username' placeholder='username'/>
+                    {touched.username && errors.username && (<p className='error'>{errors.username}</p>)}
+                    <Field type='password' name='password' placeholder='password'/>
+                    {touched.password && errors.password && (<p className='error'>{errors.password}</p>)}
+                    <button type='submit'>Sign Up</button>
+                    <p>Already Have an Account?</p>
+                    <Link to={'/sign_in'}>Sign In!</Link>
+                </Card>
             </Form>
         </div>
     )
@@ -22,15 +43,24 @@ const NewUserForm = ({valules, errors, touched, status}) => {
 const FormikNewUserForm = withFormik({
     mapPropsToValues({username, password}){
         return{
-            username: username || '',
-            password: password || ''
+            username: username || "",
+            password: password || ""
         };
     },
-    validateOnChange: Yup.object().shape({
+    validationSchema: Yup.object().shape({
         username:Yup.string().required(),
-        username:Yup.string().required()
+        password:Yup.string().required()
     }),
     handleSubmit(values, {setStatus}){
-        continue
+        console.log('hello')
+        axios
+          .post("https://reqres.in/api/users/", values)
+          .then(res => {
+            console.log("https://reqres.in/api/users/", values)
+            setStatus(res.data);
+          })
+          .catch(err => console.log(err.res));
     }
-})
+})(NewUserForm)
+
+export {FormikNewUserForm}

@@ -17,35 +17,29 @@ padding: 4% 0;
 width: 25%
 background-color: white;
 `
-
-const NewUserForm = ({values, errors, touched, status}) => {
-    // const [user, setUser] = 
-    const [user, setUser]= useState([])
-    useEffect(() => {
-        if (status) {
-          setUser([...user, status]);
-        }
-      }, [status]);
-
+document.body.style = 'background: #19354C;'
+const inputs = document.getElementsByClassName('inputField')
+inputs.style = 'margin: 2% auto;'
+const SignInForm = ({errors, touched, status}) => {
     return(
         <div>
             <Form>
                 <Card>
-                    <h2>Sign Up</h2>
-                    <Field type='text' name='username' placeholder='username'/>
+                    <h2>Sign In</h2>
+                    <Field className='inputField' type='text' name='username' placeholder='username'/>
                     {touched.username && errors.username && (<p className='error'>{errors.username}</p>)}
-                    <Field type='password' name='password' placeholder='password'/>
+                    <Field className='inputField' type='password' name='password' placeholder='password'/>
                     {touched.password && errors.password && (<p className='error'>{errors.password}</p>)}
                     <button type='submit'>Sign Up</button>
-                    <p>Already Have an Account?</p>
-                    <Link to={'/sign_in'}>Sign In!</Link>
+                    <p>Don't have an account yet?</p>
+                    <Link className='button' to={'/sign_up'}>Sign Up!</Link>
                 </Card>
             </Form>
         </div>
     )
 }
 
-const FormikNewUserForm = withFormik({
+const FormikSignInForm = withFormik({
     mapPropsToValues({username, password}){
         return{
             username: username || "",
@@ -58,14 +52,16 @@ const FormikNewUserForm = withFormik({
     }),
     handleSubmit(values, {setStatus}){
         console.log('hello')
-        axios
-          .post("https://reqres.in/api/users/", values)
-          .then(res => {
-            console.log("https://reqres.in/api/users/", values)
-            setStatus(res.data);
-          })
-          .catch(err => console.log(err.res));
+        // axios
+        //   .post("https://reqres.in/api/users/", values)
+        // //   .post("https://kickstarter-backend.herokuapp.com/api/auth/login/", values)
+        //   .then(res => {
+        //     console.log("https://reqres.in/api/users/", values)
+        //     // console.log("https://kickstarter-backend.herokuapp.com/api/auth/login/", values)
+        //     setStatus(res.data);
+        //   })
+        //   .catch(err => console.log(err.res));
     }
-})(NewUserForm)
+})(SignInForm)
 
-export {FormikNewUserForm}
+export {FormikSignInForm}

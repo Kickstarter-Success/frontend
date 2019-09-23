@@ -12,6 +12,10 @@ justify-center: center;
 align-content: center;
 align-items: center;
 margin: 10% auto;
+box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+padding: 4% 0;
+width: 25%
+background-color: white;
 `
 
 const NewUserForm = ({values, errors, touched, status}) => {
@@ -27,6 +31,7 @@ const NewUserForm = ({values, errors, touched, status}) => {
         <div>
             <Form>
                 <Card>
+                    <h2>Sign Up</h2>
                     <Field type='text' name='username' placeholder='username'/>
                     {touched.username && errors.username && (<p className='error'>{errors.username}</p>)}
                     <Field type='password' name='password' placeholder='password'/>

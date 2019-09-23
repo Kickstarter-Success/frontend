@@ -6,6 +6,9 @@ import PrivateRoute from './utils/PrivateRoute';
 import NavBar from './components/NavBar';
 
 import './App.css';
+import {FormikNewUserForm} from './components/SignUpForm'
+import {FormikSignInForm} from './components/SignInForm'
+import {Route} from 'react-router-dom'
 
 function App() {
   return (
@@ -15,8 +18,8 @@ function App() {
           <NavBar />
           <Switch>
             {/*public routes*/}
-            <Route path='/login' />
-            <Route path='/signup' />
+            <Route path='/login' component={FormikSignInForm}/>
+            <Route path='/signup' component={FormikNewUserForm}/>
             {/*private routes*/}
             <PrivateRoute exact path='/dashboard' />
             <PrivateRoute exact path='/dashboard/campaignform' />

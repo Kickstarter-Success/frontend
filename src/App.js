@@ -4,10 +4,11 @@ import PrivateRoute from './utils/PrivateRoute';
 
 // Components
 import NavBar from './components/NavBar';
+import FormikNewUserForm from './components/SignUpForm'
+import FormikSignInForm from './components/SignInForm'
 
 import './App.css';
-import {FormikNewUserForm} from './components/SignUpForm'
-import {FormikSignInForm} from './components/SignInForm'
+
 
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
             <Route path='/login' component={FormikSignInForm}/>
             <Route path='/signup' component={FormikNewUserForm}/>
             {/*private routes*/}
-            <PrivateRoute exact path='/dashboard' />
-            <PrivateRoute exact path='/dashboard/campaignform' />
+            {/* <PrivateRoute exact path='/dashboard' /> */}
+            {/* <PrivateRoute exact path='/dashboard/campaignform' /> */}
 
             {/*default*/}
             <Redirect from='/' to='/dashboard' />

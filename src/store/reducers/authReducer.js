@@ -37,7 +37,9 @@ const authReducer = (state=initialState, action) => {
     case LOGOUT:
       return {
         ...state,
-        error: ''
+        error: '',
+        isLoading: false,
+        isAuth: false,
       }
     case REGISTER_START:
       return {

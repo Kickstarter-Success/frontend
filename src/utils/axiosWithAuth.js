@@ -7,8 +7,6 @@ export const axiosWithAuth = () => {
     baseURL: "https://kickstarter-backend.herokuapp.com/api",
     headers: {
       Authorization: token,
-      // Remove when live
-      AccessControlAllowOrigin: "http://localhost:3000",
     },
   });
 };

@@ -28,9 +28,9 @@ const NavBar = props => {
         </NavLink>
       )}
       {props.isAuth && (
-        <NavLink onClick={() => props.logout()}>
+        <button onClick={() => props.logout()}>
           Logout
-        </NavLink>
+        </button>
       )}
     </div>
   )

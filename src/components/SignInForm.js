@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-import * as Yup from 'yup'
-import {withFormik, Form, Field} from 'formik'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../store/actions/authAction'
+import * as Yup from 'yup';
+import { withFormik, Form, Field } from 'formik';
+
 import styled from 'styled-components'
 
 const Card = styled.div`
@@ -20,7 +22,8 @@ background-color: white;
 document.body.style = 'background: #19354C;'
 const inputs = document.getElementsByClassName('inputField')
 inputs.style = 'margin: 2% auto;'
-const SignInForm = ({errors, touched, status}) => {
+
+const SignInForm = ({ errors, touched, ...props }) => {
     return(
         <div>
             <Form>
@@ -30,9 +33,9 @@ const SignInForm = ({errors, touched, status}) => {
                     {touched.username && errors.username && (<p className='error'>{errors.username}</p>)}
                     <Field className='inputField' type='password' name='password' placeholder='password'/>
                     {touched.password && errors.password && (<p className='error'>{errors.password}</p>)}
-                    <button type='submit'>Sign Up</button>
+                    <button type='submit'>{props.isLoading ? '...' : 'Sign in'}</button>
                     <p>Don't have an account yet?</p>
-                    <Link className='button' to={'/sign_up'}>Sign Up!</Link>
+                    <Link className='button' to={'/signup'}>Sign Up!</Link>
                 </Card>
             </Form>
         </div>
@@ -50,18 +53,17 @@ const FormikSignInForm = withFormik({
         username:Yup.string().required(),
         password:Yup.string().required()
     }),
-    handleSubmit(values, {setStatus}){
-        console.log('hello')
-        // axios
-        //   .post("https://reqres.in/api/users/", values)
-        // //   .post("https://kickstarter-backend.herokuapp.com/api/auth/login/", values)
-        //   .then(res => {
-        //     console.log("https://reqres.in/api/users/", values)
-        //     // console.log("https://kickstarter-backend.herokuapp.com/api/auth/login/", values)
-        //     setStatus(res.data);
-        //   })
-        //   .catch(err => console.log(err.res));
+    handleSubmit(values, {resetForm, props}){
+        props.login(values, props.history);
+        resetForm();
     }
 })(SignInForm)
 
-export {FormikSignInForm}
+const mapStateToProps = state => {
+    return {
+        isLoading: state.auth.isLoading,
+        error: state.auth.error
+    }
+}
+
+export default connect(mapStateToProps, { login })(FormikSignInForm)

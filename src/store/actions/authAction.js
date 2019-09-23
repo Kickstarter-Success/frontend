@@ -12,7 +12,7 @@ export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 export const login = (credentials, history) => dispatch => {
   dispatch({ type: LOGIN_START })
   axios
-    .post('/auth/login', credentials)
+    .post('https://kickstarter-backend.herokuapp.com/api/auth/login', credentials)
     .then(res => {
       console.log(res)
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
@@ -38,7 +38,7 @@ export const logout = () => dispatch => {
 export const register = (user, history) => dispatch => {
   dispatch({ type: REGISTER_START });
   axios
-    .post('/auth/register', user)
+    .post('https://kickstarter-backend.herokuapp.com/api/auth/register', user)
     .then(res => {
       dispatch({ type: REGISTER_SUCCESS })
       history.push('/login');

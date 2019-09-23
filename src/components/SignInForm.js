@@ -12,21 +12,27 @@ justify-center: center;
 align-content: center;
 align-items: center;
 margin: 10% auto;
+box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+padding: 4% 0;
+width: 25%
+background-color: white;
 `
-
+document.body.style = 'background: #19354C;'
+const inputs = document.getElementsByClassName('inputField')
+inputs.style = 'margin: 2% auto;'
 const SignInForm = ({errors, touched, status}) => {
     return(
         <div>
             <Form>
                 <Card>
                     <h2>Sign In</h2>
-                    <Field type='text' name='username' placeholder='username'/>
+                    <Field className='inputField' type='text' name='username' placeholder='username'/>
                     {touched.username && errors.username && (<p className='error'>{errors.username}</p>)}
-                    <Field type='password' name='password' placeholder='password'/>
+                    <Field className='inputField' type='password' name='password' placeholder='password'/>
                     {touched.password && errors.password && (<p className='error'>{errors.password}</p>)}
                     <button type='submit'>Sign Up</button>
                     <p>Don't have an account yet?</p>
-                    <Link to={'/sign_up'}>Sign Up!</Link>
+                    <Link className='button' to={'/sign_up'}>Sign Up!</Link>
                 </Card>
             </Form>
         </div>
@@ -46,13 +52,15 @@ const FormikSignInForm = withFormik({
     }),
     handleSubmit(values, {setStatus}){
         console.log('hello')
-        axios
-          .post("https://reqres.in/api/users/", values)
-          .then(res => {
-            console.log("https://reqres.in/api/users/", values)
-            setStatus(res.data);
-          })
-          .catch(err => console.log(err.res));
+        // axios
+        //   .post("https://reqres.in/api/users/", values)
+        // //   .post("https://kickstarter-backend.herokuapp.com/api/auth/login/", values)
+        //   .then(res => {
+        //     console.log("https://reqres.in/api/users/", values)
+        //     // console.log("https://kickstarter-backend.herokuapp.com/api/auth/login/", values)
+        //     setStatus(res.data);
+        //   })
+        //   .catch(err => console.log(err.res));
     }
 })(SignInForm)
 

@@ -3,30 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 import {FormikNewUserForm} from './components/SignUpForm'
 import {FormikSignInForm} from './components/SignInForm'
-import {Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import {CampaignDetail} from './components/CampaignDetail'
 
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      {/* <CampaignDetail/> */}
-      <Route exact path='/' component={CampaignDetail}/>
-      <Route path='/sign_up' component={FormikNewUserForm}/>
-      <Route path='/sign_in' component={FormikSignInForm}/>
+      {/* Wrapped in the Switch to prevetn /:id route from running when route /all is triggered*/}
+      <Switch>
+        <Route path='/sign_up' exact component={FormikNewUserForm}/>
+        <Route path='/sign_in' exact component={FormikSignInForm}/>
+        {/* Campaign details can be accessed three different ways!! */}
+        <Route path='/all' render={(props)=><CampaignDetail {...props}/>}/>
+        <Route path='/:id' render={(props)=><CampaignDetail {...props}/>}/>
+        <Route path='/:user/:id' render={(props)=><CampaignDetail {...props}/>}/>
+      </Switch>
     </div>
   );
 }

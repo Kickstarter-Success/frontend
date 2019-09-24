@@ -5,9 +5,23 @@ import axios from 'axios';
 function CampaignList(){
     const [campaignList, setCampaignList] = useState([]);
 
-    useEffect()
+    useEffect(()=>{
+        axios.get()
+            .then((res)=>{
+                console.log(res)
+                setCampaignList(res)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+    },[]);
     return(
         <>
+        {
+            campaignList.map((campaign)=>(
+                <CampaginCard/>
+            ))
+        }
         </>
     );
 };

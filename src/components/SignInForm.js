@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { register } from '../store/actions/authAction';
+import { login } from '../store/actions/authAction'
 import * as Yup from 'yup';
 import { withFormik, Form, Field } from 'formik';
 
@@ -19,27 +19,30 @@ padding: 4% 0;
 width: 25%
 background-color: white;
 `
+document.body.style = 'background: #19354C;'
+const inputs = document.getElementsByClassName('inputField')
+inputs.style = 'margin: 2% auto;'
 
-const NewUserForm = ({ errors, touched, ...props }) => {  
+const SignInForm = ({ errors, touched, ...props }) => {
     return(
         <div>
             <Form>
                 <Card>
-                    <h2>Sign Up</h2>
-                    <Field type='text' name='username' placeholder='username'/>
+                    <h2>Sign In</h2>
+                    <Field className='inputField' type='text' name='username' placeholder='username'/>
                     {touched.username && errors.username && (<p className='error'>{errors.username}</p>)}
-                    <Field type='password' name='password' placeholder='password'/>
+                    <Field className='inputField' type='password' name='password' placeholder='password'/>
                     {touched.password && errors.password && (<p className='error'>{errors.password}</p>)}
-                    <button type='submit'>{props.isLoading ? '...' : 'Sign Up'}</button>
-                    <p>Already Have an Account?</p>
-                    <Link to={'/login'}>Sign In!</Link>
+                    <button type='submit'>{props.isLoading ? '...' : 'Sign in'}</button>
+                    <p>Don't have an account yet?</p>
+                    <Link className='button' to={'/signup'}>Sign Up!</Link>
                 </Card>
             </Form>
         </div>
     )
 }
 
-const FormikNewUserForm = withFormik({
+const FormikSignInForm = withFormik({
     mapPropsToValues({username, password}){
         return{
             username: username || "",
@@ -50,21 +53,17 @@ const FormikNewUserForm = withFormik({
         username:Yup.string().required(),
         password:Yup.string().required()
     }),
-
-    handleSubmit(values, { props }){
-        let user = {
-            username: values.username,
-            password: values.password
-        };
-        props.register(user, props.history)
+    handleSubmit(values, {resetForm, props}){
+        props.login(values, props.history);
+        resetForm();
     }
-})(NewUserForm)
+})(SignInForm)
 
-const mapPropstoState = state => {
+const mapStateToProps = state => {
     return {
         isLoading: state.auth.isLoading,
         error: state.auth.error
     }
 }
 
-export default connect(mapPropstoState, { register })(FormikNewUserForm);
+export default connect(mapStateToProps, { login })(FormikSignInForm)

@@ -17,7 +17,8 @@ padding: 4% 0;
 width: 25%
 background-color: white;
 `
-document.body.style = 'background: #19354C;'
+//deleting background color
+
 const inputs = document.getElementsByClassName('inputField')
 inputs.style = 'margin: 2% auto;'
 const SignInForm = ({errors, touched, status}) => {

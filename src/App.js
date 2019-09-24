@@ -4,6 +4,7 @@ import './App.css';
 import {FormikNewUserForm} from './components/SignUpForm'
 import {FormikSignInForm} from './components/SignInForm'
 import {Route} from 'react-router-dom'
+import {CampaignDetail} from './components/CampaignDetail'
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
           Learn React
         </a>
       </header> */}
-      
+      {/* <CampaignDetail/> */}
+      <Route exact path='/' component={CampaignDetail}/>
       <Route path='/sign_up' component={FormikNewUserForm}/>
       <Route path='/sign_in' component={FormikSignInForm}/>
     </div>

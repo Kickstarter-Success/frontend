@@ -9,7 +9,7 @@ export default function CampaignCard({campaign}) {
     <p>Monetary Goal:{campaign.monetaryGoal}</p>
     <p>Duration:{campaign.duration}</p>
     <p>Country:{campaign.country}</p>
-    <p>Status:{campaign.status}</p>
+    <p>Status:</p>
     <Link to="#">
         <button>
         Campaign Details

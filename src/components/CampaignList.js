@@ -7,7 +7,7 @@ function CampaignList() {
 
 	useEffect(() => {
 		axios
-			.get("https://kickstarter-backend.herokuapp.com/api/kickstarter/all")
+			.get("#")
 			.then(res => {
 				console.log(res);
 				setCampaignList(res);
@@ -19,7 +19,7 @@ function CampaignList() {
 	return (
 		<>
 			{campaignList.map(campaign => (
-				<CampaginCard />
+				<CampaginCard campaign={campaign}/>
 			))}
 		</>
 	);

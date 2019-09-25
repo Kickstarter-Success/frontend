@@ -14,11 +14,11 @@ export const login = (credentials, history) => dispatch => {
   axiosWithAuth()
     .post('/auth/login', credentials)
     .then(res => {
-      console.log(res)
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       // set token to local storage
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user_id', res.data.id);
+      localStorage.setItem('username', res.data.username);
       // route to dashboard
       history.push('/dashboard');
     })
@@ -32,6 +32,7 @@ export const logout = () => dispatch => {
   dispatch({ type: LOGOUT });
   localStorage.removeItem('token');
   localStorage.removeItem('user_id');
+  localStorage.removeItem('username');
 }
 
 // sign up actions

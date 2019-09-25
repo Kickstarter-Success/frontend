@@ -22,7 +22,7 @@ const initalState = {
 }
 
 const campaignReducer = ( state = initalState, action) => {
-  switch(action) {
+  switch(action.type) {
     case ADD_CAMPAIGN_START:
       return {
         ...state,
@@ -35,6 +35,23 @@ const campaignReducer = ( state = initalState, action) => {
         isLoading: false
       }
     case ADD_CAMPAIGN_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      }
+    case GET_CAMPAIGN_START: 
+      return {
+        ...state,
+        isLoading: true
+      }
+    case GET_CAMPAIGN_SUCCESS:
+      return {
+        ...state,
+        campaigns: action.payload,
+        isLoading: false
+      }
+    case GET_CAMPAIGN_FAILURE:
       return {
         ...state,
         error: action.payload,

@@ -28,16 +28,17 @@ const NavBar = props => {
         </NavLink>
       )}
       {props.isAuth && (
-        <button onClick={() => props.logout()}>
-          Logout
-        </button>
+        <NavLink to='/login'>
+          <button onClick={() => props.logout()}>
+            Logout
+          </button>
+        </NavLink>
       )}
     </div>
   )
 }
 
 const mapPropsToState = state => {
-  console.log('navBar state', state)
   return {
     isAuth: state.auth.isAuth,
   };

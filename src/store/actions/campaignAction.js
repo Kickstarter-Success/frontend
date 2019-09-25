@@ -59,11 +59,12 @@ export const editCampaign = (campaign, history, id) => dispatch => {
 
 // get campaigns
 
-export const getCampaigns = (user_id, history) => dispatch => {
+export const getCampaigns = (user_id) => dispatch => {
   dispatch({ type: GET_CAMPAIGN_START })
   axiosWithAuth()
     .get(`/kickstarter/user/${user_id}`)
     .then(res => {
+      console.log(res)
       dispatch({ type: GET_CAMPAIGN_SUCCESS, payload: res.data })
     })
     .catch(err => {

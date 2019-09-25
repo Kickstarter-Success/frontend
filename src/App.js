@@ -6,8 +6,8 @@ import PrivateRoute from './utils/PrivateRoute';
 import NavBar from './components/NavBar';
 import FormikNewUserForm from './components/SignUpForm';
 import FormikSignInForm from './components/SignInForm';
-import FormikAddCampaignForm from './components/AddCampaignForm'
-import {CampaignDetail} from './components/CampaignDetail'
+import FormikAddCampaignForm from './components/AddCampaignForm';
+import {CampaignDetail} from './components/CampaignDetail';
 
 import './App.css';
 

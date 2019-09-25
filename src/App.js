@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import FormikNewUserForm from './components/SignUpForm';
 import FormikSignInForm from './components/SignInForm';
 import FormikAddCampaignForm from './components/AddCampaignForm'
+import {CampaignDetail} from './components/CampaignDetail'
 
 import './App.css';
 
@@ -23,6 +24,10 @@ function App() {
             {/*private routes*/}
             {/* <PrivateRoute exact path='/dashboard' /> */}
             <PrivateRoute exact path='/dashboard/campaignform' component={FormikAddCampaignForm}/>
+             {/* Campaign details can be accessed three different ways!! */}
+            <Route path='/all' render={(props)=><CampaignDetail {...props}/>}/>
+            <Route path='/:id' render={(props)=><CampaignDetail {...props}/>}/>
+            <Route path='/:user/:id' render={(props)=><CampaignDetail {...props}/>}/>
 
             {/*default*/}
             <Redirect from='/' to='/dashboard' />

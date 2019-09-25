@@ -3,10 +3,23 @@ import { connect } from 'react-redux';
 import { getCampaigns, grabCampaign, deleteCampaign } from '../store/actions/campaignAction';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components'
+import {H1,WhiteButton, ColoredButton, Card, P, H2, H3} from './style'
 
 const Campaign = styled.div`
-    display: flex;
+   margin-top:8%;
 `;
+const ButtonWrapper = styled.div`
+display:flex;
+justify-content: space-around; `
+
+const Details = styled.div`
+display:flex;
+justify-content: space-around;
+align-items: center; 
+align-content: center;
+padding: 8% 0 10% 0;
+`
+
 
 const CampaignDetail = (props) => {
     const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history } = props
@@ -22,16 +35,26 @@ const CampaignDetail = (props) => {
     },[campaigns, match])        
     
     return(
-        <div>
-            <h1>{campaign.campaignName}</h1>
-            <p>{campaign.description}</p>
-            <p>{campaign.categories}</p>
-            <p>{campaign.monetaryGoal}</p>
-            <p>{campaign.duration}</p>
-            <p>{campaign.country}</p>
-            <button onClick={()=>grabCampaign(campaign, history)}>Edit</button>
-            <button onClick={()=>deleteCampaign(campaign.id, history)}>Delete</button>
-        </div>
+        <Campaign>
+            <Card>
+                <H1>{campaign.campaignName}</H1>
+                <H2>{campaign.description}</H2>
+                <Details>
+                    <div>
+                        <H3>Industry:  {campaign.categories}</H3>
+                        <H3>Country:  {campaign.country}</H3>
+                    </div>
+                    <div>
+                        <H3>Goal:  {campaign.monetaryGoal}</H3>
+                        <H3>Length:  {campaign.duration}</H3>
+                    </div>
+                </Details>
+                <ButtonWrapper>
+                    <ColoredButton small onClick={()=>grabCampaign(campaign, history)>Edit</ColoredButton>
+                    <ColoredButton small  onClick={()=>deleteCampaign(campaign.id, history)>Delete</ColoredButton>
+                </ButtonWrapper>
+            </Card>
+        </Campaign>
     )
 };
 

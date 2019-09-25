@@ -108,7 +108,6 @@ const FormikAddCampaignForm =  withFormik({
 })(AddCampaignForm);
 
 const mapStateToProps = state => {
-	console.log('add form state', state)
 	return {
 		campaigns: state.campaign.campaigns,
 		error: state.campaign.error,

@@ -1,28 +1,39 @@
-import React, { useEffect, useState } from "react";
-import CampaginCard from "./CampaignCard";
-import axios from "axios";
+import React, { useEffect } from "react";
+import CampaignCard from "./CampaignCard";
+import { connect } from 'react-redux';
+import { getCampaigns } from '../store/actions/campaignAction'
+import Loader from 'react-loader-spinner'
 
-function CampaignList() {
-	const [campaignList, setCampaignList] = useState([]);
+
+function CampaignList(props) {
+	const { getCampaigns, isLoading, campaigns } = props
+	const user_id = localStorage.getItem('user_id')
 
 	useEffect(() => {
-		axios
-			.get("#")
-			.then(res => {
-				console.log(res);
-				setCampaignList(res);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-	}, []);
+		getCampaigns(user_id)
+	}, [getCampaigns, user_id]);
+
+	if(isLoading) {
+		return (
+		<>
+		<Loader type='Puff' color='#05ce78' height={60} width={60}/>
+		</>)
+	}
+
 	return (
 		<>
-			{campaignList.map(campaign => (
-				<CampaginCard campaign={campaign}/>
+			{campaigns.length > 0 && campaigns.map(campaign => (
+				<CampaignCard key={campaign.id} campaign={campaign}/>
 			))}
 		</>
 	);
 }
 
-export default CampaignList;
+const mapStateToProps = state => {
+	return {
+		campaigns: state.campaign.campaigns,
+		isLoading: state.campaign.isLoading
+	}
+};
+
+export default connect(mapStateToProps, { getCampaigns })(CampaignList);

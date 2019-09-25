@@ -1,8 +1,10 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-import * as Yup from 'yup'
-import {withFormik, Form, Field} from 'formik'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { register } from '../store/actions/authAction';
+import * as Yup from 'yup';
+import { withFormik, Form, Field } from 'formik';
+
 import styled from 'styled-components'
 
 const Card = styled.div`
@@ -18,15 +20,7 @@ width: 25%
 background-color: white;
 `
 
-const NewUserForm = ({values, errors, touched, status}) => {
-    // const [user, setUser] = 
-    const [user, setUser]= useState([])
-    useEffect(() => {
-        if (status) {
-          setUser([...user, status]);
-        }
-      }, [status]);
-
+const NewUserForm = ({ errors, touched, ...props }) => {  
     return(
         <div>
             <Form>
@@ -36,9 +30,9 @@ const NewUserForm = ({values, errors, touched, status}) => {
                     {touched.username && errors.username && (<p className='error'>{errors.username}</p>)}
                     <Field type='password' name='password' placeholder='password'/>
                     {touched.password && errors.password && (<p className='error'>{errors.password}</p>)}
-                    <button type='submit'>Sign Up</button>
+                    <button type='submit'>{props.isLoading ? '...' : 'Sign Up'}</button>
                     <p>Already Have an Account?</p>
-                    <Link to={'/sign_in'}>Sign In!</Link>
+                    <Link to={'/login'}>Sign In!</Link>
                 </Card>
             </Form>
         </div>
@@ -56,16 +50,21 @@ const FormikNewUserForm = withFormik({
         username:Yup.string().required(),
         password:Yup.string().required()
     }),
-    handleSubmit(values, {setStatus}){
-        console.log('hello')
-        axios
-          .post("https://reqres.in/api/users/", values)
-          .then(res => {
-            console.log("https://reqres.in/api/users/", values)
-            setStatus(res.data);
-          })
-          .catch(err => console.log(err.res));
+
+    handleSubmit(values, { props }){
+        let user = {
+            username: values.username,
+            password: values.password
+        };
+        props.register(user, props.history)
     }
 })(NewUserForm)
 
-export {FormikNewUserForm}
+const mapPropstoState = state => {
+    return {
+        isLoading: state.auth.isLoading,
+        error: state.auth.error
+    }
+}
+
+export default connect(mapPropstoState, { register })(FormikNewUserForm);

@@ -1,24 +1,40 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {FormikNewUserForm} from './components/SignUpForm'
-import {FormikSignInForm} from './components/SignInForm'
-import {Route, Switch} from 'react-router-dom'
+import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import PrivateRoute from './utils/PrivateRoute';
+
+// Components
+import NavBar from './components/NavBar';
+import FormikNewUserForm from './components/SignUpForm';
+import FormikSignInForm from './components/SignInForm';
+import FormikAddCampaignForm from './components/AddCampaignForm'
 import {CampaignDetail} from './components/CampaignDetail'
+
+import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      {/* Wrapped in the Switch to prevetn /:id route from running when route /all is triggered*/}
-      <Switch>
-        <Route path='/sign_up' exact component={FormikNewUserForm}/>
-        <Route path='/sign_in' exact component={FormikSignInForm}/>
-        {/* Campaign details can be accessed three different ways!! */}
-        <Route path='/all' render={(props)=><CampaignDetail {...props}/>}/>
-        <Route path='/:id' render={(props)=><CampaignDetail {...props}/>}/>
-        <Route path='/:user/:id' render={(props)=><CampaignDetail {...props}/>}/>
-      </Switch>
-    </div>
+    <>
+      <Router>
+        <div className="App">
+          <NavBar />
+          <Switch>
+            {/*public routes*/}
+            <Route path='/login' component={FormikSignInForm}/>
+            <Route path='/signup' component={FormikNewUserForm}/>
+            {/*private routes*/}
+            {/* <PrivateRoute exact path='/dashboard' /> */}
+            <PrivateRoute exact path='/dashboard/campaignform' component={FormikAddCampaignForm}/>
+             {/* Campaign details can be accessed three different ways!! */}
+            <Route path='/all' render={(props)=><CampaignDetail {...props}/>}/>
+            <Route path='/:id' render={(props)=><CampaignDetail {...props}/>}/>
+            <Route path='/:user/:id' render={(props)=><CampaignDetail {...props}/>}/>
+
+            {/*default*/}
+            <Redirect from='/' to='/dashboard' />
+          </Switch>          
+        </div>
+      </Router>
+    </>
   );
 }
 

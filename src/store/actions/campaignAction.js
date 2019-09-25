@@ -17,23 +17,14 @@ export const GET_CAMPAIGN_FAILURE ='GET_CAMPAIGN_FAILURE';
 export const addCampaign = (campaign, history, user_id) => dispatch => {
   dispatch({ type: ADD_CAMPAIGN_START });
   campaign.user_id = parseInt(user_id, 10)
-  console.log(campaign.user_id)
-  console.log(user_id)
-  user_id = parseInt(user_id, 10)
-  if (user_id == campaign.user_id){
-    console.log('it should work')
-  } else {
-    console.log ('we found the problem')
-  }
+  
   axiosWithAuth()
-    .post(`/kickstarter/user/${user_id}`)
+    .post(`/kickstarter/user/${user_id}`, campaign)
     .then(res => {
-      console.log(campaign)
-      dispatch({ type: ADD_CAMPAIGN_SUCCESS, payload: campaign })
+      dispatch({ type: ADD_CAMPAIGN_SUCCESS, payload: res.data })
       history.push('/dashboard')
     })
     .catch(err => {
-      console.log(campaign)
       dispatch({ type: ADD_CAMPAIGN_FAILURE, payload: err.response })
     })
 }

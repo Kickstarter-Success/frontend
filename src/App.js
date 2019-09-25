@@ -10,8 +10,6 @@ import FormikAddCampaignForm from './components/AddCampaignForm'
 
 import './App.css';
 
-
-
 function App() {
   return (
     <>

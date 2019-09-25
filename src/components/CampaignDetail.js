@@ -50,8 +50,8 @@ const CampaignDetail = (props) => {
                     </div>
                 </Details>
                 <ButtonWrapper>
-                    <ColoredButton small onClick={()=>grabCampaign(campaign, history)>Edit</ColoredButton>
-                    <ColoredButton small  onClick={()=>deleteCampaign(campaign.id, history)>Delete</ColoredButton>
+                    <ColoredButton small onClick={()=>grabCampaign(campaign, history)}>Edit</ColoredButton>
+                    <ColoredButton small  onClick={()=>deleteCampaign(campaign.id, history)}>Delete</ColoredButton>
                 </ButtonWrapper>
             </Card>
         </Campaign>

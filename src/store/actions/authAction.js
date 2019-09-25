@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
 
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -11,8 +11,8 @@ export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 // login actions
 export const login = (credentials, history) => dispatch => {
   dispatch({ type: LOGIN_START })
-  axios
-    .post('https://kickstarter-backend.herokuapp.com/api/auth/login', credentials)
+  axiosWithAuth()
+    .post('/auth/login', credentials)
     .then(res => {
       console.log(res)
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
@@ -37,8 +37,8 @@ export const logout = () => dispatch => {
 // sign up actions
 export const register = (user, history) => dispatch => {
   dispatch({ type: REGISTER_START });
-  axios
-    .post('https://kickstarter-backend.herokuapp.com/api/auth/register', user)
+  axiosWithAuth()
+    .post('/auth/register', user)
     .then(res => {
       dispatch({ type: REGISTER_SUCCESS })
       history.push('/login');

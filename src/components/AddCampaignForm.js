@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+import { connect } from 'react-redux';
+import { addCampaign } from '../store/actions/campaignAction'
 
-function AddCampaignForm({ status, values, isSubmitting }) {
+function AddCampaignForm({ status, values, ...props }) {
 	const [campaign, setCampaign] = useState([]);
 
 	useEffect(() => {
@@ -22,14 +23,14 @@ function AddCampaignForm({ status, values, isSubmitting }) {
 				<ErrorMessage name='campaignName' />
 				<br/>
 
-				<Field component='select' name='category' placeholder='Category'>
+				<Field component='select' name='categories' placeholder='Categories'>
 					<option>Select A Category</option>
 					<option value='tech'>Tech</option>
 					<option value='health'>Health</option>
 					<option value='education'>Education</option>
 				</Field>
 				<br />
-				<ErrorMessage name='category' />
+				<ErrorMessage name='categories' />
 				<br/>
 	
 				<Field type='text' name='description' placeholder='Description' />
@@ -57,18 +58,18 @@ function AddCampaignForm({ status, values, isSubmitting }) {
 				<br />
 				<ErrorMessage name='duration' />
 				<br />
-				<button type='submit' disabled={isSubmitting}>
-					Submit
+				<button type='submit'>
+					{props.isLoading ? "..." : 'Submit'}
 				</button>
 			</Form>
 		</>
 	);
 }
 
-export default withFormik({
+const FormikAddCampaignForm =  withFormik({
 	mapPropsToValues({
 		campaignName,
-		category,
+		categories,
 		description,
 		monetaryGoal,
 		country,
@@ -76,7 +77,7 @@ export default withFormik({
 	}) {
 		return {
 			campaignName: campaignName || '',
-			category: category || "",
+			categories: categories || "",
 			description: description || "",
 			monetaryGoal: monetaryGoal || '',
 			country: country || "",
@@ -87,7 +88,7 @@ export default withFormik({
 		campaignName: Yup.string()
 			.min(2, "Name must be 2 characters or longer")
 			.required("Name is required"),
-		category: Yup.string()
+		categories: Yup.string()
 			.required("Category is required"),
 		description: Yup.string()
 			.min(8, "Description must be more than 8 character")
@@ -99,18 +100,20 @@ export default withFormik({
 			.required("Country selection is required"),
 		duration: Yup.number().required("Length of campaign is required")
 	}),
-	handleSubmit(values, { setStatus, resetForm, setErrors, setSubmitting }) {
-		axios
-			.post("https://reqres.in/api/users", values)
-			.then(res => {
-				setStatus(res.data);
-				console.log(res.data);
-				resetForm();
-				setSubmitting(false);
-			})
-			.catch(err => {
-				console.log(err);
-				setSubmitting(false);
-			});
+
+	handleSubmit(values, { props }) {
+		let user_id = localStorage.getItem('user_id');
+		props.addCampaign(values, props.history, user_id)
 	}
 })(AddCampaignForm);
+
+const mapStateToProps = state => {
+	console.log('add form state', state)
+	return {
+		campaigns: state.campaign.campaigns,
+		error: state.campaign.error,
+		isLoading: state.campaign.isLoading,
+	}
+};
+
+export default connect(mapStateToProps, { addCampaign })(FormikAddCampaignForm)

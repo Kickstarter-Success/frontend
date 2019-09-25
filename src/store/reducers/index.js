@@ -4,5 +4,5 @@ import campaignReducer from './campaignReducer';
 
 export default combineReducers({
   auth: authReducer,
-  // campaign: campaignReducer
+  campaign: campaignReducer
 });

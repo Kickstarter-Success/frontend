@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { connect } from 'react-redux';
-import { addCampaign, getCampaign, editCampaign } from '../store/actions/campaignAction'
+import { addCampaign, editCampaign } from '../store/actions/campaignAction'
 import Loader from 'react-loader-spinner';
 
 function AddCampaignForm({ status, values, ...props }) {
-	const [campaign, setCampaign] = useState([]);
-
 	useEffect(() => {
-		if (status) {
-			setCampaign([...campaign, status]);
+		if (props.activeCampaign) {
+			props.setValues(props.activeCampaign)
 		}
-	}, [status, campaign]);
+	}, [props.activeCampaign]);
 
 	if(props.isLoading) {
 		return (
@@ -125,4 +123,4 @@ const mapStateToProps = state => {
 	}
 };
 
-export default connect(mapStateToProps, { addCampaign })(FormikAddCampaignForm)
+export default connect(mapStateToProps, { addCampaign, editCampaign })(FormikAddCampaignForm)

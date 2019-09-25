@@ -90,6 +90,7 @@ const campaignReducer = ( state = initalState, action) => {
       case EDIT_CAMPAIGN_SUCCESS:
         return {
           ...state,
+          error: '',
           isLoading: false,
           activeCampaign: null
         }

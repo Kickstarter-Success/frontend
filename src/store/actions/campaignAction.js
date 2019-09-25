@@ -45,7 +45,7 @@ export const deleteCampaign = (id, history) => dispatch => {
 }
 
 // edit campaign
-export const grabReview = (history, campaign) =>  dispatch => {
+export const grabCampaign = (campaign, history) =>  dispatch => {
   dispatch ({ type: GRAB_CAMPAIGN, payload: campaign})
   history.push('/dashboard/campaignform')
   };
@@ -55,7 +55,7 @@ export const editCampaign = (campaign, history, id) => dispatch => {
   axiosWithAuth()
     .put(`/kickstarter/${id}`, campaign)
     .then(res => {
-      dispatch({ EDIT_CAMPAIGN_SUCCESS, payload: res.data })
+      dispatch({ type: EDIT_CAMPAIGN_SUCCESS, payload: res.data })
       history.push('/dashboard')
     })
     .catch(err => {

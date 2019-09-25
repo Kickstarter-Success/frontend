@@ -1,34 +1,35 @@
 import React, { useEffect } from "react";
-import CampaginCard from "./CampaignCard";
+import CampaignCard from "./CampaignCard";
 import { connect } from 'react-redux';
 import { getCampaigns } from '../store/actions/campaignAction'
 import Loader from 'react-loader-spinner'
 
 
 function CampaignList(props) {
-	
-	console.log(props)
+	const { getCampaigns, isLoading, campaigns } = props
 	const user_id = localStorage.getItem('user_id')
 
 	useEffect(() => {
-		props.getCampaigns(user_id)
+		getCampaigns(user_id)
 	}, [getCampaigns, user_id]);
 
 	if(isLoading) {
-		return <Loader />
+		return (
+		<>
+		<Loader type='Puff' color='#05ce78' height={60} width={60}/>
+		</>)
 	}
 
 	return (
 		<>
-			{props.campaigns.length > 0 && props.campaigns.map(campaign => (
-				<CampaginCard campaign={campaign}/>
+			{campaigns.length > 0 && campaigns.map(campaign => (
+				<CampaignCard key={campaign.id} campaign={campaign}/>
 			))}
 		</>
 	);
 }
 
 const mapStateToProps = state => {
-	console.log(state)
 	return {
 		campaigns: state.campaign.campaigns,
 		isLoading: state.campaign.isLoading

@@ -64,7 +64,6 @@ export const getCampaigns = (user_id) => dispatch => {
   axiosWithAuth()
     .get(`/kickstarter/user/${user_id}`)
     .then(res => {
-      console.log(res)
       dispatch({ type: GET_CAMPAIGN_SUCCESS, payload: res.data })
     })
     .catch(err => {

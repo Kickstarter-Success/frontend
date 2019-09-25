@@ -2,20 +2,26 @@ import React, { useEffect, useState } from "react";
 import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { connect } from 'react-redux';
-import { addCampaign } from '../store/actions/campaignAction'
+import { addCampaign, editCampaign } from '../store/actions/campaignAction'
+import Loader from 'react-loader-spinner';
 
 function AddCampaignForm({ status, values, ...props }) {
-	const [campaign, setCampaign] = useState([]);
-
 	useEffect(() => {
-		if (status) {
-			setCampaign([...campaign, status]);
+		if (props.activeCampaign) {
+			props.setValues(props.activeCampaign)
 		}
-	}, [status, campaign]);
+	}, [props.activeCampaign]);
+
+	if(props.isLoading) {
+		return (
+		<>
+		<Loader type='Puff' color='#05ce78' height={60} width={60}/>
+		</>)
+	}
 
 	return (
 		<>
-			<h1>Add New Campaign</h1>
+			<h1>{props.activeCampaign ? 'Edit Campaign' : 'Add New Campaign'}</h1>
 			<Form>
 	
 				<Field type='text' name='campaignName' placeholder='Campaign Name' />
@@ -58,9 +64,7 @@ function AddCampaignForm({ status, values, ...props }) {
 				<br />
 				<ErrorMessage name='duration' />
 				<br />
-				<button type='submit'>
-					{props.isLoading ? "..." : 'Submit'}
-				</button>
+				<button type='submit'>Submit</button>
 			</Form>
 		</>
 	);
@@ -102,17 +106,21 @@ const FormikAddCampaignForm =  withFormik({
 	}),
 
 	handleSubmit(values, { props }) {
+		if(props.activeCampaign) {
+			props.editCampaign(values, props.history, props.activeCampaign.id);
+		} else {
 		let user_id = localStorage.getItem('user_id');
 		props.addCampaign(values, props.history, user_id)
-	}
+	}}
 })(AddCampaignForm);
 
 const mapStateToProps = state => {
 	return {
 		campaigns: state.campaign.campaigns,
+		activeCampaign: state.campaign.activeCampaign,
 		error: state.campaign.error,
 		isLoading: state.campaign.isLoading,
 	}
 };
 
-export default connect(mapStateToProps, { addCampaign })(FormikAddCampaignForm)
+export default connect(mapStateToProps, { addCampaign, editCampaign })(FormikAddCampaignForm)

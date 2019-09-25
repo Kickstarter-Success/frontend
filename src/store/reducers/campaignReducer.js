@@ -7,7 +7,8 @@ import {
   DELETE_CAMPAIGN_FAILURE,
   EDIT_CAMPAIGN_START,
   EDIT_CAMPAIGN_SUCCESS, 
-  EDIT_CAMPAIGN_FAILURE, 
+  EDIT_CAMPAIGN_FAILURE,
+  GRAB_CAMPAIGN, 
   GET_CAMPAIGN_START, 
   GET_CAMPAIGN_SUCCESS, 
   GET_CAMPAIGN_FAILURE, 
@@ -57,6 +58,48 @@ const campaignReducer = ( state = initalState, action) => {
         error: action.payload,
         isLoading: false
       }
+    case DELETE_CAMPAIGN_START:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case DELETE_CAMPAIGN_SUCCESS:
+      const newArr = state.campaigns.filter(campaign => campaign.id === action.payload)
+      return {
+        ...state,
+        campaigns: newArr,
+        isLoading: false
+      }
+      case DELETE_CAMPAIGN_FAILURE:
+        return {
+          ...state,
+          error: action.payload,
+          isLoading: false
+        }
+      case GRAB_CAMPAIGN:
+        return {
+          ...state,
+          isLoading: false,
+          activeCampaign: action.payload
+        }
+      case EDIT_CAMPAIGN_START:
+        return {
+          ...state,
+          isLoading: true
+        }
+      case EDIT_CAMPAIGN_SUCCESS:
+        return {
+          ...state,
+          error: '',
+          isLoading: false,
+          activeCampaign: null
+        }
+      case EDIT_CAMPAIGN_FAILURE:
+        return {
+          ...state,
+          isLoading: false,
+          error: action.payload
+        }
     default:
       return state;
   }

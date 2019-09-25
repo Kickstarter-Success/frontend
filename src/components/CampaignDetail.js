@@ -1,6 +1,6 @@
 import React, {useState, useEffect}from 'react';
 import { connect } from 'react-redux';
-import { getCampaigns, editCampaign, deleteCampaign } from '../store/actions/campaignAction';
+import { getCampaigns, grabCampaign, deleteCampaign } from '../store/actions/campaignAction';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components'
 import {H1,WhiteButton, ColoredButton, Card, P, H2, H3} from './style'
@@ -22,18 +22,17 @@ padding: 8% 0 10% 0;
 
 
 const CampaignDetail = (props) => {
-    console.log(props)
-    const { getCampaigns, editCampaign, deleteCampaign, campaigns, match, history } = props
+    const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history } = props
     const [campaign, setCampaign] = useState({});
+    const user_id = localStorage.getItem('user_id')
 
     useEffect(()=>{
+        if (campaigns.length === 0) {getCampaigns(user_id)};
         const campaignToDisplay = campaigns.find(campaignInList => `${campaignInList.id}` === match.params.id)
         if (campaignToDisplay) {
             setCampaign(campaignToDisplay);
         }
-        console.log(campaignToDisplay)
-    },[campaigns, match])
-        console.log(campaign)
+    },[campaigns, match])        
     
     return(
         <Campaign>
@@ -51,8 +50,8 @@ const CampaignDetail = (props) => {
                     </div>
                 </Details>
                 <ButtonWrapper>
-                    <ColoredButton small >Edit</ColoredButton>
-                    <ColoredButton small >Delete</ColoredButton>
+                    <ColoredButton small onClick={()=>grabCampaign(campaign, history)>Edit</ColoredButton>
+                    <ColoredButton small  onClick={()=>deleteCampaign(campaign.id, history)>Delete</ColoredButton>
                 </ButtonWrapper>
             </Card>
         </Campaign>
@@ -66,4 +65,4 @@ const mapStateToProps = state => {
 	}
 };
 
-export default connect(mapStateToProps, { getCampaigns, editCampaign, deleteCampaign })(CampaignDetail);
+export default connect(mapStateToProps, { getCampaigns, grabCampaign, deleteCampaign })(CampaignDetail);

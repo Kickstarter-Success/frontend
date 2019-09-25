@@ -4,20 +4,22 @@ import { connect } from 'react-redux';
 import { register } from '../store/actions/authAction';
 import * as Yup from 'yup';
 import { withFormik, Form, Field } from 'formik';
+import {H1, ColoredButton, Card, P} from './style'
+
 
 import styled from 'styled-components'
 
-const Card = styled.div`
-display: flex;
+const InputWrapper = styled.div`
+display:flex;
 flex-direction: column;
-justify-center: center;
-align-content: center;
+justify-content: center;
 align-items: center;
-margin: 10% auto;
-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-padding: 4% 0;
-width: 25%
-background-color: white;
+align-content:space-between;
+padding: 4%;
+width: 100%;
+`
+const IWChild = styled.div`
+margin: 2% 0;
 `
 
 const NewUserForm = ({ errors, touched, ...props }) => {  
@@ -25,13 +27,21 @@ const NewUserForm = ({ errors, touched, ...props }) => {
         <div>
             <Form>
                 <Card>
-                    <h2>Sign Up</h2>
+                    <H1>Sign Up</H1>
+                    <InputWrapper>
+                    <IWChild>
                     <Field type='text' name='username' placeholder='username'/>
-                    {touched.username && errors.username && (<p className='error'>{errors.username}</p>)}
+                    {touched.username && errors.username && (<P fail className='error'>{errors.username}</P>)}
+                    </IWChild>
+                    <IWChild>
                     <Field type='password' name='password' placeholder='password'/>
-                    {touched.password && errors.password && (<p className='error'>{errors.password}</p>)}
-                    <button type='submit'>{props.isLoading ? '...' : 'Sign Up'}</button>
-                    <p>Already Have an Account?</p>
+                    {touched.password && errors.password && (<P fail className='error'>{errors.password}</P>)}
+                    </IWChild>
+                    <IWChild>
+                    <ColoredButton type='submit'>{props.isLoading ? '...' : 'Sign Up'}</ColoredButton>
+                    </IWChild>
+                    </InputWrapper>
+                    <P>Already Have an Account?</P>
                     <Link to={'/login'}>Sign In!</Link>
                 </Card>
             </Form>

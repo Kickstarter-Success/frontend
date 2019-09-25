@@ -4,22 +4,22 @@ import { connect } from 'react-redux';
 import { login } from '../store/actions/authAction'
 import * as Yup from 'yup';
 import { withFormik, Form, Field } from 'formik';
+import {H1, ColoredButton, Card, P} from './style'
 
 import styled from 'styled-components'
 
-const Card = styled.div`
-display: flex;
+const InputWrapper = styled.div`
+display:flex;
 flex-direction: column;
-justify-center: center;
-align-content: center;
+justify-content: center;
 align-items: center;
-margin: 10% auto;
-box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-padding: 4% 0;
-width: 25%
-background-color: white;
+align-content:space-between;
+padding: 4%;
+width: 100%;
 `
-//deleting background color
+const IWChild = styled.div`
+margin: 2% 0;
+`
 
 const inputs = document.getElementsByClassName('inputField')
 inputs.style = 'margin: 2% auto;'
@@ -29,13 +29,21 @@ const SignInForm = ({ errors, touched, ...props }) => {
         <div>
             <Form>
                 <Card>
-                    <h2>Sign In</h2>
-                    <Field className='inputField' type='text' name='username' placeholder='username'/>
-                    {touched.username && errors.username && (<p className='error'>{errors.username}</p>)}
-                    <Field className='inputField' type='password' name='password' placeholder='password'/>
-                    {touched.password && errors.password && (<p className='error'>{errors.password}</p>)}
-                    <button type='submit'>{props.isLoading ? '...' : 'Sign in'}</button>
-                    <p>Don't have an account yet?</p>
+                    <H1>Sign In</H1>
+                    <InputWrapper>
+                    <IWChild>
+                        <Field className='inputField' type='text' name='username' placeholder='username'/>
+                        {touched.username && errors.username && (<P fail className='error'>{errors.username}</P>)}
+                    </IWChild>
+                    <IWChild>
+                        <Field className='inputField' type='password' name='password' placeholder='password'/>
+                        {touched.password && errors.password && (<P fail className='error'>{errors.password}</P>)}
+                    </IWChild>
+                    <IWChild>
+                        <ColoredButton type='submit'>{props.isLoading ? '...' : 'Sign in'}</ColoredButton>
+                    </IWChild>
+                    </InputWrapper>
+                    <P>Don't have an account yet?</P>
                     <Link className='button' to={'/signup'}>Sign Up!</Link>
                 </Card>
             </Form>

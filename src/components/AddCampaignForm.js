@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { connect } from 'react-redux';
 import { addCampaign, editCampaign } from '../store/actions/campaignAction'
 import Loader from 'react-loader-spinner';
+import { category, countries } from '../dropDownData';
 
 function AddCampaignForm({ status, values, ...props }) {
 	useEffect(() => {
@@ -19,6 +20,9 @@ function AddCampaignForm({ status, values, ...props }) {
 		</>)
 	}
 
+	const categoriesList =Object.keys(category);
+	const countriesList = Object.keys(countries);
+
 	return (
 		<>
 			<h1>{props.activeCampaign ? 'Edit Campaign' : 'Add New Campaign'}</h1>
@@ -31,9 +35,9 @@ function AddCampaignForm({ status, values, ...props }) {
 
 				<Field component='select' name='categories' placeholder='Categories'>
 					<option>Select A Category</option>
-					<option value='tech'>Tech</option>
-					<option value='health'>Health</option>
-					<option value='education'>Education</option>
+					{
+						categoriesList.map((categories)=>(<option value={categories}>{categories}</option>))
+					}
 				</Field>
 				<br />
 				<ErrorMessage name='categories' />
@@ -49,9 +53,9 @@ function AddCampaignForm({ status, values, ...props }) {
 				<br />
 				<Field component='select' name='country' placeholder='Country'>
 					<option>Select A Country</option>
-					<option value='US'>US</option>
-					<option value='UK'>UK</option>
-					<option value='China'>China</option>
+					{
+						countriesList.map((countries)=>(<option value={countries}>{countries}</option>))
+					}
 				</Field>
 				<br />
 				<ErrorMessage name='country' />

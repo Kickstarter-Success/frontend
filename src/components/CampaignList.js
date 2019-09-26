@@ -2,8 +2,15 @@ import React, { useEffect } from "react";
 import CampaignCard from "./CampaignCard";
 import { connect } from 'react-redux';
 import { getCampaigns } from '../store/actions/campaignAction'
-import Loader from 'react-loader-spinner'
+import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
+import {large} from './style';
 
+const CampaignListDiv = styled.div`
+	margin-top: ${large};
+	display: flex;
+	flex-wrap: wrap;
+`;
 
 function CampaignList(props) {
 	const { getCampaigns, isLoading, campaigns } = props
@@ -21,11 +28,11 @@ function CampaignList(props) {
 	}
 
 	return (
-		<>
+		<CampaignListDiv>
 			{campaigns.length > 0 && campaigns.map(campaign => (
 				<CampaignCard key={campaign.id} campaign={campaign}/>
 			))}
-		</>
+		</CampaignListDiv>
 	);
 }
 

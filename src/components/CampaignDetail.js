@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getCampaigns, grabCampaign, deleteCampaign } from '../store/actions/campaignAction';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components'
-import {H1,WhiteButton, ColoredButton, Card, P, H2, H3} from './style'
+import {H1, ColoredButton, Card, H2, H3} from './style'
 
 const Campaign = styled.div`
    margin-top:8%;

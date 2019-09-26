@@ -20,8 +20,8 @@ function AddCampaignForm({ status, values, ...props }) {
 		</>)
 	}
 
-	const fuck =Object.keys(category);
-	const off = Object.keys(countries);
+	const categoriesList =Object.keys(category);
+	const countriesList = Object.keys(countries);
 
 	return (
 		<>
@@ -36,7 +36,7 @@ function AddCampaignForm({ status, values, ...props }) {
 				<Field component='select' name='categories' placeholder='Categories'>
 					<option>Select A Category</option>
 					{
-						fuck.map((cunt)=>(<option value={cunt}>{cunt}</option>))
+						categoriesList.map((categories)=>(<option value={categories}>{categories}</option>))
 					}
 				</Field>
 				<br />
@@ -54,7 +54,7 @@ function AddCampaignForm({ status, values, ...props }) {
 				<Field component='select' name='country' placeholder='Country'>
 					<option>Select A Country</option>
 					{
-						off.map((bitch)=>(<option value={bitch}>{bitch}</option>))
+						countriesList.map((countries)=>(<option value={countries}>{countries}</option>))
 					}
 				</Field>
 				<br />

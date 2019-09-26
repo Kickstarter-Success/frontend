@@ -68,7 +68,8 @@ const CampaignDetail = (props) => {
 const mapStateToProps = state => {
 	return {
 		campaigns: state.campaign.campaigns,
-		isLoading: state.campaign.isLoading
+        isLoading: state.campaign.isLoading,
+        url: state.campaign.url
 	}
 };
 

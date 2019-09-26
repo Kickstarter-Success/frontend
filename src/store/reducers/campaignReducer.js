@@ -11,7 +11,10 @@ import {
   GRAB_CAMPAIGN, 
   GET_CAMPAIGN_START, 
   GET_CAMPAIGN_SUCCESS, 
-  GET_CAMPAIGN_FAILURE, 
+  GET_CAMPAIGN_FAILURE,
+  GET_DATAURL_START,
+  GET_DATAURL_SUCCESS,
+  GET_DATAURL_FAILURE 
 } from '../actions/campaignAction'
 
 const initalState = {
@@ -19,7 +22,8 @@ const initalState = {
   error: '',
   isLoading: false,
   activeCampaign: null,
-  user: ''
+  user: '',
+  url:''
 }
 
 const campaignReducer = ( state = initalState, action) => {
@@ -99,6 +103,23 @@ const campaignReducer = ( state = initalState, action) => {
           ...state,
           isLoading: false,
           error: action.payload
+        }
+      case GET_DATAURL_START:
+        return {
+          ...state,
+          isLoading: true
+        }
+      case GET_DATAURL_SUCCESS:
+        return {
+          ...state,
+          url: action.payload,
+          isLoading: false
+        }
+      case GET_DATAURL_FAILURE:
+        return {
+          ...state,
+          error: action.payload,
+          isLoading: false
         }
     default:
       return state;

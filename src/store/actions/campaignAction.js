@@ -1,4 +1,5 @@
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
+import { dispatch } from 'rxjs/internal/observable/pairs';
 
 export const ADD_CAMPAIGN_START ='ADD_CAMPAIGN_START';
 export const ADD_CAMPAIGN_SUCCESS ='ADD_CAMPAIGN_SUCCESS';
@@ -13,6 +14,10 @@ export const GRAB_CAMPAIGN ='GRAB_CAMPAIGN';
 export const GET_CAMPAIGN_START ='GET_CAMPAIGN_START';
 export const GET_CAMPAIGN_SUCCESS ='GET_CAMPAIGN_SUCCESS';
 export const GET_CAMPAIGN_FAILURE ='GET_CAMPAIGN_FAILURE';
+export const GET_DATAURL_START ='GET_DATAURL_START';
+export const GET_DATAURL_SUCCESS ='GET_DATAURL_SUCCESS';
+export const GET_DATAURL_FAILURE ='GET_DATAURL_FAILURE';
+
 
 //add campaign
 export const addCampaign = (campaign, history, user_id) => dispatch => {
@@ -22,6 +27,7 @@ export const addCampaign = (campaign, history, user_id) => dispatch => {
   axiosWithAuth()
     .post(`/kickstarter/user/${user_id}`, campaign)
     .then(res => {
+      console.log(res.data)
       dispatch({ type: ADD_CAMPAIGN_SUCCESS, payload: res.data })
       history.push('/dashboard')
     })
@@ -74,5 +80,18 @@ export const getCampaigns = (user_id) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: GET_CAMPAIGN_FAILURE, payload: err.response })
+    })
+}
+
+// get data url
+export const getDataUrl = (id) => dispatch => {
+  dispatch({ type: GET_DATAURL_START })
+  axiosWithAuth()
+    .get(`/kickstarter/visualizations/${id}`)
+    .then(res => {
+      dispatch({ type: GET_CAMPAIGN_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: GET_DATAURL_FAILURE, payload: err.response })
     })
 }

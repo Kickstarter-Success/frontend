@@ -65,7 +65,7 @@ const NavBar = props => {
         </NavStyle>
       )}
       {props.isAuth && (
-        <NavStyle to='/login' >
+        <NavStyle to='/login'>
           <ButtonNoStyle onClick={() => props.logout()}>
             LOGOUT
           </ButtonNoStyle>

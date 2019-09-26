@@ -1,5 +1,4 @@
 import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import { dispatch } from 'rxjs/internal/observable/pairs';
 
 export const ADD_CAMPAIGN_START ='ADD_CAMPAIGN_START';
 export const ADD_CAMPAIGN_SUCCESS ='ADD_CAMPAIGN_SUCCESS';

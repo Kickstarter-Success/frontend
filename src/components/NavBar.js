@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../store/actions/authAction';
 import styled from 'styled-components';
-import { NavStyle, Pale_Sea_Green} from './style';
+import { NavStyle } from './style';
 import KICK from '../imgs/KICK.png';
 
 const StyledNav = styled.div`

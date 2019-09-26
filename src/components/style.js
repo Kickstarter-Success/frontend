@@ -1,6 +1,6 @@
 /* <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900&display=swap" rel="stylesheet"></link> */
 import styled from "styled-components";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 //Font Style
 
 // font-family: ${font};
@@ -202,18 +202,14 @@ export const WhiteButton = styled(Button)`
 
 export const Card = styled.div`
 width: 400px;
-// height: 500px;
 margin: 3% auto;
 background-color:white;
-// margin: 3%;
 border-radius: 10px;
 padding: 2% 0%;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   :hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    // border: black 1px solid;
-    // border-radius: 2px;
   }
   box-sizing: border-box;  
-`
+`;

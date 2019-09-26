@@ -22,7 +22,7 @@ padding: 8% 0 10% 0;
 
 
 const CampaignDetail = (props) => {
-    const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history } = props
+    const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history, isLoading } = props
     const [campaign, setCampaign] = useState({});
     const user_id = localStorage.getItem('user_id')
 
@@ -32,7 +32,14 @@ const CampaignDetail = (props) => {
         if (campaignToDisplay) {
             setCampaign(campaignToDisplay);
         }
-    },[campaigns, match])        
+    },[campaigns, match])
+    
+    if(isLoading) {
+		return (
+		<>
+		<Loader type='Puff' color='#05ce78' height={60} width={60}/>
+		</>)
+	}
     
     return(
         <Campaign>

@@ -144,7 +144,7 @@ export const P = styled.p`
     font-size: ${p_font_size};
     ${props => (props.dark ? `color: ${Dark_Slate_Green};` : null)}
     ${props => (props.darkbrand ? `color: ${KickStarter_Green};` : null)}
-    ${props => (props.mediumbrand ? `color: ${Pale_KickStarter};` : null)}
+    ${props => (props.mediumbrand ? `color: ${Pale_KickStarter}; font-size: 18px;` : null)}
     ${props => (props.medium ? `color: ${Pale_Sea_Green};` : null)}
     ${props => (props.lightgreen ? `color: ${Mute_Sea_Green};` : null)}
     ${props => (props.lightblue ? `color: ${Pale_Green_Blue};` : null)}

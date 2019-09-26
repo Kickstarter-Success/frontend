@@ -9,14 +9,17 @@ import {
 	Mute_Sea_Green,
 	medium,
 	smalltwo,
-	WhiteButton 
+	WhiteButton,
+	P 
 } from "./style";
-//--------------------------------_Styles
+import tag from '../imgs/tag.png';
+import location from '../imgs/location.png';
+//--------------------------------_Styles Sorry - I just now remember you can nest in Styles component
 const CustomCard = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 400px;
+	width: 375px;
 	border-radius: 20px;
 	margin: 3% auto;
 	background-color: white;
@@ -31,10 +34,18 @@ const CustomCard = styled.div`
 const StyledDiv = styled.div`
 	background: ${Mute_Sea_Green};
 	padding: ${medium};
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
 `;
 
 const HeaderStyleDiv = styled(StyledDiv)`
 	background: ${Mute_Sea_Green};
+
+	h3{
+		font-size: 25px;
+	}
 `;
 
 const CategoryCountry = styled.div`
@@ -44,7 +55,7 @@ const CategoryCountry = styled.div`
 `;
 
 const Monetary = styled.p`
-	font-size: ${h1_font_size};
+	font-size: 70px;
 	color: ${Pale_KickStarter};
 	font-weight: 800;
 	text-shadow: 0.5px 0.5px #aaafaa;
@@ -54,25 +65,44 @@ const OutcomeDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	height: 10rem;
-	padding-bottom: 20px;
+	height: 15rem;
+
+	padding-bottom: 40px;
 `;
 
 const RegText = styled.p`
 	color: ${Pale_KickStarter};
-	font-size: 14px;
+	font-size: 18px;
 	text-shadow: 0.5px 0.5px #aaafaa;
 	font-weight: 800;
 `;
 
 const DayText = styled(RegText)`
-	font-size: 18px;
+	font-size: 32px;
 `;
 
 const Success = styled.div`
 	color: black;
 	font-size: ${h1_font_size};
+	margin-bottom: 20px;
+	font-family: 'Lato';
 `;
+
+const Icon = styled.img`
+width: 40px;
+`;
+
+const Categrory = styled.div`
+	display: flex;
+
+`;
+
+const Country = styled.div`
+	display: flex;
+	justify-content: flex-end;
+	
+`;
+
 
 //--------------------------------_Styles END
 
@@ -89,11 +119,17 @@ export default function CampaignCard(props) {
 		<>
 			<CustomCard>
 				<HeaderStyleDiv>
-					<H3 white>{campaignName}</H3>
+					<H3 black>{campaignName}</H3>
 				</HeaderStyleDiv>
 				<CategoryCountry>
-					<p>{categories}</p>
-					<p>{country}</p>
+					<Categrory>
+						<Icon src={tag} alt='tag'/>
+						<P mediumbrand>{categories}</P>
+					</Categrory>
+					<Country>
+						<Icon src={location} alt='location'/>
+						<P mediumbrand>{country}</P>
+					</Country>
 				</CategoryCountry>
 				<OutcomeDiv>
 					<Monetary>${monetaryGoal}</Monetary>
@@ -104,7 +140,7 @@ export default function CampaignCard(props) {
 				<StyledDiv>
 					<Success>Success</Success>
 					<Link to={`/dashboard/campaign/${id}`}>
-						<WhiteButton lightgreen>View Results
+						<WhiteButton mediumbrand>View Results
 						</WhiteButton>
 						</Link>
 				</StyledDiv>

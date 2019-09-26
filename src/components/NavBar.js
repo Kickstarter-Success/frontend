@@ -33,12 +33,15 @@ const ButtonNoStyle = styled(NavStyle)`
 	outline: inherit;
 `;
 
+const LogoText = styled(NavStyle)`
+font-size: 36px;
+`;
 const NavBar = props => {
   return (
     <StyledNav>
       <LogoDiv >
       <LogoStyle src={KICK}></LogoStyle>
-      <NavStyle to="#">Kickstarter Success</NavStyle>
+      <LogoText>Kickstarter Success</LogoText>
       </LogoDiv >
       <div>
       {!props.isAuth && (

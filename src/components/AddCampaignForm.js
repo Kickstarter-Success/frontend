@@ -3,6 +3,31 @@ import { withFormik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { connect } from 'react-redux';
 import { addCampaign } from '../store/actions/campaignAction'
+import {H1,WhiteButton, ColoredButton, Card, P, H2, H3} from './style'
+import styled from 'styled-components'
+
+const InputWrapper = styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+align-content:space-between;
+padding: 4%;
+width: 100%;
+`
+const IWChild = styled.div`
+margin: 2% 0;
+width: 100%;
+`
+const Div = styled.div`
+display:flex;
+justify-content: space-evenly;
+width:60%;
+margin 0 auto;
+align-content: center;
+align-items:center ;
+
+`
 
 function AddCampaignForm({ status, values, ...props }) {
 	const [campaign, setCampaign] = useState([]);
@@ -14,55 +39,73 @@ function AddCampaignForm({ status, values, ...props }) {
 	}, [status, campaign]);
 
 	return (
-		<>
-			<h1>Add New Campaign</h1>
+		<Card>
+			<H1>Add New Campaign</H1>
 			<Form>
+				
+				<InputWrapper>	
+					<IWChild>
+						<Field className='inputForm' type='text' name='campaignName' placeholder='Campaign Name' />
+						
+						<ErrorMessage name='campaignName'>{msg => <P fail>{msg}</P>}</ErrorMessage>
+						
+					</IWChild>
+					<IWChild>
+						<Field className='inputForm' component='select' name='categories' placeholder='Categories'>
+							<option>Select A Category</option>
+							<option value='tech'>Tech</option>
+							<option value='health'>Health</option>
+							<option value='education'>Education</option>
+						</Field>
+						
+						<ErrorMessage name='categories'>{msg => <P fail>{msg}</P>}</ErrorMessage>
+						
+			
+					</IWChild>
+					<IWChild>
+						<Div>
+						<H2>$: </H2>
+							<Field className='inputForm money' type='number' name='monetaryGoal' placeholder='Fundraising Goal Amount' />
+						</Div>
+						<ErrorMessage name='monetaryGoal'>{msg => <P fail>{msg}</P>}</ErrorMessage>
+					</IWChild>
+					<IWChild>
 	
-				<Field type='text' name='campaignName' placeholder='Campaign Name' />
-				<br />
-				<ErrorMessage name='campaignName' />
-				<br/>
-
-				<Field component='select' name='categories' placeholder='Categories'>
-					<option>Select A Category</option>
-					<option value='tech'>Tech</option>
-					<option value='health'>Health</option>
-					<option value='education'>Education</option>
-				</Field>
-				<br />
-				<ErrorMessage name='categories' />
-				<br/>
-	
-				<Field type='text' name='description' placeholder='Description' />
-				<br />
-				<ErrorMessage name='description' />
-				<br />
-				<Field type='number' name='monetaryGoal' placeholder='Fundraising Goal Amount' />
-				<br />
-				<ErrorMessage name='monetaryGoal' />
-				<br />
-				<Field component='select' name='country' placeholder='Country'>
-					<option>Select A Country</option>
-					<option value='US'>US</option>
-					<option value='UK'>UK</option>
-					<option value='China'>China</option>
-				</Field>
-				<br />
-				<ErrorMessage name='country' />
-				<br />
-				<Field
-					type='number'
-					name='duration'
-					placeholder='Duration of Campaign'
-				/>
-				<br />
-				<ErrorMessage name='duration' />
-				<br />
-				<button type='submit'>
+						<Field className='inputForm' component='select' name='country' placeholder='Country'>
+							<option>Select A Country</option>
+							<option value='US'>US</option>
+							<option value='UK'>UK</option>
+							<option value='China'>China</option>
+						</Field>
+					
+						<ErrorMessage name='country'>{msg => <P fail>{msg}</P>}</ErrorMessage>				
+					
+						
+					</IWChild>
+					<IWChild>
+					<Div>
+					<H2 classename='days'>Days: </H2>
+						<Field
+							className='inputForm' 	
+							type='number'
+							name='duration'
+							placeholder='Duration of Campaign'/>
+						
+					</Div>
+						<ErrorMessage name='duration'>{msg => <P fail>{msg}</P>}</ErrorMessage>
+					</IWChild>
+					<IWChild>
+						<Field className='inputForm' type='text' component='textarea' name='description' placeholder='Description' />
+					
+						<ErrorMessage name='description'>{msg => <P fail>{msg}</P>}</ErrorMessage>				
+						
+					</IWChild>
+				</InputWrapper>
+				<ColoredButton type='submit'>
 					{props.isLoading ? "..." : 'Submit'}
-				</button>
+				</ColoredButton>
 			</Form>
-		</>
+		</Card>
 	);
 }
 
@@ -98,7 +141,9 @@ const FormikAddCampaignForm =  withFormik({
 			.required("Fundraising goal is required"),
 		country: Yup.string()
 			.required("Country selection is required"),
-		duration: Yup.number().required("Length of campaign is required")
+		duration: Yup
+		.number().required("Length of campaign is required")
+		.min(1, "Must be at least 1 day")
 	}),
 
 	handleSubmit(values, { props }) {

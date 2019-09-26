@@ -12,3 +12,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.inputForm{
+  border-radius:5px;
+  padding: 1% 2%;
+  width: 70%;
+  /* border:#2fbf81 1px solid; */
+  margin: 0 0 4% 0;
+
+}
+.inputForm:focus {
+  outline: none !important;
+  border:#2fbf81 1px solid;
+    box-shadow: 0 0 3px #2fbf81
+ }
+textarea {
+  width: 150px;
+  height: 75px;
+}
+
+.money{
+  width: 90%;
+}
+.days{
+  align-self:center;
+  
+}

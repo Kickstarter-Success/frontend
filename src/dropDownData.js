@@ -168,7 +168,7 @@ export const countries = {
 'France': 4,
 'Canada': 5,
 'Germany': 6,
-'Italiy': 7,
+'Italy': 7,
 'Netherlands': 8,
 'Switzerland': 9,
 'Denmark': 10,

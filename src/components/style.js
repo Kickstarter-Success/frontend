@@ -1,6 +1,6 @@
 /* <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900&display=swap" rel="stylesheet"></link> */
 import styled from "styled-components";
-import { NavLink} from "react-router-dom";
+
 //Font Style
 
 // font-family: ${font};
@@ -126,17 +126,7 @@ export const H6 = styled.h6`
     ${props => (props.fail ? `color: ${failure};` : null)}        
 `;
 
-export const NavStyle = styled(NavLink)`
-	font-family: ${font};
-	font-weight: ${bold};
-	font-size: ${h2_font_size};
-	color: ${white};
-	text-decoration: none;
-	margin-left: ${medium};
-	&:hover {
-		transform: scale(1.1);
-	}
-`;
+
 
 export const P = styled.p`
     font-family: ${font};

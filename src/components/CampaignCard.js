@@ -21,7 +21,7 @@ const CustomCard = styled.div`
 	justify-content: space-between;
 	width: 375px;
 	border-radius: 20px;
-	margin: 3% auto;
+	margin: 4rem auto;
 	background-color: white;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -140,7 +140,7 @@ export default function CampaignCard(props) {
 				<StyledDiv>
 					<Success>Success</Success>
 					<Link to={`/dashboard/campaign/${id}`}>
-						<WhiteButton mediumbrand>View Results
+						<WhiteButton className='nav' mediumbrand>View Results
 						</WhiteButton>
 						</Link>
 				</StyledDiv>

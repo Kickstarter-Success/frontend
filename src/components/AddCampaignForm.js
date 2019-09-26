@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { addCampaign, editCampaign } from '../store/actions/campaignAction'
 import Loader from 'react-loader-spinner';
 import { category, countries } from '../dropDownData';
-import {H1,WhiteButton, ColoredButton, Card, P, H2, H3} from './style'
+import {H1, ColoredButton, Card, P, H2} from './style'
 import styled from 'styled-components'
 
 const InputWrapper = styled.div`
@@ -16,20 +16,20 @@ align-items: center;
 align-content:space-between;
 padding: 4%;
 width: 100%;
-`
+`;
 const IWChild = styled.div`
 margin: 2% 0;
 width: 100%;
-`
+`;
 const Div = styled.div`
 display:flex;
 justify-content: space-evenly;
 width:60%;
-margin 0 auto;
+margin: 0 auto;
 align-content: center;
 align-items:baseline ;
 
-`
+`;
 
 
 function AddCampaignForm({ status, values, ...props }) {
@@ -64,7 +64,7 @@ function AddCampaignForm({ status, values, ...props }) {
 					<Field className='inputForm' component='select' name='categories' placeholder='Categories'>
 						<option>Select A Category</option>
 						{
-							categoriesList.map((categories)=>(<option value={categories}>{categories}</option>))
+							categoriesList.map((categories)=>(<option key={categories} value={categories}>{categories}</option>))
 						}
 					</Field>
 					
@@ -83,7 +83,7 @@ function AddCampaignForm({ status, values, ...props }) {
 					<Field className='inputForm' component='select' name='country' placeholder='Country'>
 						<option>Select A Country</option>
 						{
-							countriesList.map((countries)=>(<option value={countries}>{countries}</option>))
+							countriesList.map((countries)=>(<option key={countries} value={countries}>{countries}</option>))
 						}
 					</Field>
 					<ErrorMessage name='country'>{msg => <P fail>{msg}</P>}</ErrorMessage>

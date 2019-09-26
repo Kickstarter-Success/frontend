@@ -20,3 +20,27 @@
 .App-link {
   color: #09d3ac;
 }
+
+.nav{
+  font-weight: 900;
+	font-size: 18px;
+	color: white;
+	text-decoration: none;
+	margin-left: 30px;
+
+}
+
+.nav:hover {
+  transform: scale(1.1);
+
+}
+
+.nav:active {
+  transform: scale(1.1);
+  color: white;
+}
+
+.logout{
+  display: flex;
+  width: 300px;
+}

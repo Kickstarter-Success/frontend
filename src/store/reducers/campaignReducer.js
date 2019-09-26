@@ -14,7 +14,7 @@ import {
   GET_CAMPAIGN_FAILURE,
   GET_DATAURL_START,
   GET_DATAURL_SUCCESS,
-  GET_DATAURL_FAILURE 
+  GET_DATAURL_FAILURE,
 } from '../actions/campaignAction'
 
 const initalState = {
@@ -59,7 +59,7 @@ const campaignReducer = ( state = initalState, action) => {
     case GET_CAMPAIGN_FAILURE:
       return {
         ...state,
-        error: action.payload,
+        campaigns: action.payload,
         isLoading: false
       }
     case DELETE_CAMPAIGN_START:

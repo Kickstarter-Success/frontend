@@ -5,6 +5,32 @@ import { connect } from 'react-redux';
 import { addCampaign, editCampaign } from '../store/actions/campaignAction'
 import Loader from 'react-loader-spinner';
 import { category, countries } from '../dropDownData';
+import {H1,WhiteButton, ColoredButton, Card, P, H2, H3} from './style'
+import styled from 'styled-components'
+
+const InputWrapper = styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+align-content:space-between;
+padding: 4%;
+width: 100%;
+`
+const IWChild = styled.div`
+margin: 2% 0;
+width: 100%;
+`
+const Div = styled.div`
+display:flex;
+justify-content: space-evenly;
+width:60%;
+margin 0 auto;
+align-content: center;
+align-items:baseline ;
+
+`
+
 
 function AddCampaignForm({ status, values, ...props }) {
 	useEffect(() => {
@@ -25,51 +51,66 @@ function AddCampaignForm({ status, values, ...props }) {
 
 	return (
 		<>
-			<h1>{props.activeCampaign ? 'Edit Campaign' : 'Add New Campaign'}</h1>
+		<Card>
 			<Form>
-	
-				<Field type='text' name='campaignName' placeholder='Campaign Name' />
-				<br />
-				<ErrorMessage name='campaignName' />
-				<br/>
-
-				<Field component='select' name='categories' placeholder='Categories'>
-					<option>Select A Category</option>
-					{
-						categoriesList.map((categories)=>(<option value={categories}>{categories}</option>))
-					}
-				</Field>
-				<br />
-				<ErrorMessage name='categories' />
-				<br/>
-	
-				<Field type='text' name='description' placeholder='Description' />
-				<br />
-				<ErrorMessage name='description' />
-				<br />
-				<Field type='number' name='monetaryGoal' placeholder='Fundraising Goal Amount' />
-				<br />
-				<ErrorMessage name='monetaryGoal' />
-				<br />
-				<Field component='select' name='country' placeholder='Country'>
-					<option>Select A Country</option>
-					{
-						countriesList.map((countries)=>(<option value={countries}>{countries}</option>))
-					}
-				</Field>
-				<br />
-				<ErrorMessage name='country' />
-				<br />
-				<Field
-					type='number'
-					name='duration'
-					placeholder='Duration of Campaign'
-				/>
-				<br />
-				<ErrorMessage name='duration' />
-				<br />
-				<button type='submit'>Submit</button>
+			<H1 darkbrand>{props.activeCampaign ? 'Edit Campaign' : 'Add New Campaign'}</H1>
+				<InputWrapper>
+				<IWChild>
+					<Field className='inputForm' type='text' name='campaignName' placeholder='Campaign Name' />
+					<ErrorMessage name='campaignName'>{msg => <P fail>{msg}</P>}</ErrorMessage>
+				</IWChild>
+				
+				<IWChild>
+					<Field className='inputForm' component='select' name='categories' placeholder='Categories'>
+						<option>Select A Category</option>
+						{
+							categoriesList.map((categories)=>(<option value={categories}>{categories}</option>))
+						}
+					</Field>
+					
+					<ErrorMessage name='categories'>{msg => <P fail>{msg}</P>}</ErrorMessage>
+					
+				</IWChild>
+				<IWChild>
+				<Div>
+						<H2>$: </H2>
+					<Field className='inputForm' type='number' name='monetaryGoal' placeholder='Fundraising Goal' />
+				</Div>
+					<ErrorMessage name='monetaryGoal'>{msg => <P fail>{msg}</P>}</ErrorMessage>
+				</IWChild>
+				
+				<IWChild>
+					<Field className='inputForm' component='select' name='country' placeholder='Country'>
+						<option>Select A Country</option>
+						{
+							countriesList.map((countries)=>(<option value={countries}>{countries}</option>))
+						}
+					</Field>
+					<ErrorMessage name='country'>{msg => <P fail>{msg}</P>}</ErrorMessage>
+				</IWChild>
+				
+				<IWChild>
+				<Div>
+				<H2 classname='days'>Days: </H2>
+					<Field
+						className='inputForm'
+						type='number'
+						name='duration'
+						placeholder='Duration'
+					/>
+					</Div>
+					<ErrorMessage name='duration'>{msg => <P fail>{msg}</P>}</ErrorMessage>
+				</IWChild>
+				<IWChild>
+						<Field className='inputForm' type='text' component='textarea' name='description' placeholder='Description' />
+					
+						<ErrorMessage name='description'>{msg => <P fail>{msg}</P>}</ErrorMessage>				
+						
+					</IWChild>
+				</InputWrapper>
+				<ColoredButton type='submit'> Submit</ColoredButton>
 			</Form>
+		</Card>
 		</>
 	);
 }
@@ -106,7 +147,9 @@ const FormikAddCampaignForm =  withFormik({
 			.required("Fundraising goal is required"),
 		country: Yup.string()
 			.required("Country selection is required"),
-		duration: Yup.number().required("Length of campaign is required")
+		duration: Yup.number()
+			.required("Length of campaign is required")
+			.min(2, "Must be at least 1 day")
 	}),
 
 	handleSubmit(values, { props }) {

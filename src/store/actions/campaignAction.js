@@ -17,7 +17,6 @@ export const GET_DATAURL_START ='GET_DATAURL_START';
 export const GET_DATAURL_SUCCESS ='GET_DATAURL_SUCCESS';
 export const GET_DATAURL_FAILURE ='GET_DATAURL_FAILURE';
 
-
 //add campaign
 export const addCampaign = (campaign, history, user_id) => dispatch => {
   dispatch({ type: ADD_CAMPAIGN_START });
@@ -26,7 +25,6 @@ export const addCampaign = (campaign, history, user_id) => dispatch => {
   axiosWithAuth()
     .post(`/kickstarter/user/${user_id}`, campaign)
     .then(res => {
-      console.log(res.data)
       dispatch({ type: ADD_CAMPAIGN_SUCCESS, payload: res.data })
       history.push('/dashboard')
     })

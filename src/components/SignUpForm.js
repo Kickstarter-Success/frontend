@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { register } from '../store/actions/authAction';
 import * as Yup from 'yup';
 import { withFormik, Form, Field } from 'formik';
+import Loader from 'react-loader-spinner';
 import {H1, ColoredButton, Card, P} from './style'
 
 
@@ -22,7 +23,14 @@ const IWChild = styled.div`
 margin: 2% 0;
 `
 
-const NewUserForm = ({ errors, touched, ...props }) => {  
+const NewUserForm = ({ errors, touched, ...props }) => {
+    if(props.isLoading) {
+        return (
+        <>
+        <Loader type='Puff' color='#05ce78' height={60} width={60}/>
+        </>)
+    }
+      
     return(
         <div>
             <Form>
@@ -38,7 +46,7 @@ const NewUserForm = ({ errors, touched, ...props }) => {
                     {touched.password && errors.password && (<P fail className='error'>{errors.password}</P>)}
                     </IWChild>
                     <IWChild>
-                    <ColoredButton type='submit'>{props.isLoading ? '...' : 'Sign Up'}</ColoredButton>
+                    <ColoredButton type='submit'>Sign Up</ColoredButton>
                     </IWChild>
                     </InputWrapper>
                     <P>Already Have an Account?</P>

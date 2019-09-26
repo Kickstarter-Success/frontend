@@ -129,7 +129,7 @@ export const H6 = styled.h6`
 export const NavStyle = styled(NavLink)`
 	font-family: ${font};
 	font-weight: ${bold};
-	font-size: ${nav_link_font_size};
+	font-size: ${h2_font_size};
 	color: ${white};
 	text-decoration: none;
 	margin-left: ${medium};

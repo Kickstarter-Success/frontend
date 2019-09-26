@@ -8,7 +8,8 @@ import {
 	Pale_KickStarter,
 	Mute_Sea_Green,
 	medium,
-	smalltwo
+	smalltwo,
+	WhiteButton 
 } from "./style";
 //--------------------------------_Styles
 const CustomCard = styled.div`
@@ -66,7 +67,11 @@ const RegText = styled.p`
 
 const DayText = styled(RegText)`
 	font-size: 18px;
+`;
 
+const Success = styled.div`
+	color: black;
+	font-size: ${h1_font_size};
 `;
 
 //--------------------------------_Styles END
@@ -97,8 +102,11 @@ export default function CampaignCard(props) {
 					<DayText>{duration} days</DayText>
 				</OutcomeDiv>
 				<StyledDiv>
-					<div>Fuck YOU</div>
-					<Link to={`/dashboard/campaign/${id}`}>View Campaign Results</Link>
+					<Success>Success</Success>
+					<Link to={`/dashboard/campaign/${id}`}>
+						<WhiteButton lightgreen>View Results
+						</WhiteButton>
+						</Link>
 				</StyledDiv>
 			</CustomCard>
 		</>

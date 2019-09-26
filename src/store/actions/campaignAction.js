@@ -21,7 +21,6 @@ export const GET_DATAURL_FAILURE ='GET_DATAURL_FAILURE';
 export const addCampaign = (campaign, history, user_id) => dispatch => {
   dispatch({ type: ADD_CAMPAIGN_START });
   campaign.user_id = parseInt(user_id, 10)
-  
   axiosWithAuth()
     .post(`/kickstarter/user/${user_id}`, campaign)
     .then(res => {

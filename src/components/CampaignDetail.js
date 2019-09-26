@@ -62,6 +62,7 @@ const CampaignDetail = (props) => {
                     <ColoredButton small  onClick={()=>deleteCampaign(campaign.id, history)}>Delete</ColoredButton>
                 </ButtonWrapper>
             </Card>
+            
         </Campaign>
     )
 };

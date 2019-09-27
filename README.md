@@ -1,68 +1,148 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Front-End-Kickstarter-Success
 
-## Available Scripts
+**Deployed website**:
+[Kickstarter Success](https://kickstartersuccess.now.sh/)
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+The Kickstarter Success React App is built for anyone to test how likely their campaign will be successful on Kickstart website. Our app displays the successful percentage, category comparison and other data from the machine learning model. As a user of our app, you'll be able to create, edit, delete your campaigns on the dashboard.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+To begin using the App as a client end user, follow the link and Sign Up for a new account with a username and password. User will be prompted to enter username and password again after the inital Sign Up to login to their dashboard.
+<!-- <img width="600" height="400" src=/> -->
 
-### `npm test`
+To login to the App, follow the link and login with the correct username and password.
+<!-- <img width="600" height="400" src="" /> -->
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To view the dashboard, login with user credentials and the first page rendered after the login is the dashboard On the dashboard page, there will be the user info and campaigns.
+<!-- <img width="600" height="400" src="" /> -->
 
-### `npm run build`
+To create a new campaign, click on the "Add a campaign" button or the "ADD CAMPAIGN" on nav bar, enter all the information such as campaign name, campaign category, fundraising goal, country, duration and description. Click "Submit" to save the campaign.
+<!-- <img width="600" height="400" src=""> -->
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To view the campaign result, click on "View result" at the bottom of a campaign card. Doing so will redirect user to a page with the corresponding campaign with predictions. 
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+To edit the campaign, click on "Edit" on the result page and that would redirect to the campaign form. User can edit any information on the form and click "Submit" to save all the edits and rerun the prediction.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To delete the campaign, click on "Delete" on the result page and the campaign will be deleted. The page will render back to the dashboard automatically.
+<!-- <img width="600" height="400" src="" /> -->
 
-### `npm run eject`
+## Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+All of the below dependencies can be installed using:
+`yarn install` or `npm install`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start development by creating a react app using:
+`yarn start` or `npm start`
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Dependencies
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+This project was created using yarn and designed for react client side. Other dependencies include:
 
-## Learn More
+```
+"axios": "^0.19.0",
+"formik": "^1.5.8",
+"now": "^16.2.0",
+"react": "^16.9.0",
+"react-dom": "^16.9.0",
+"react-iframe": "^1.8.0",
+"react-loader-spinner": "^3.1.4",
+"react-redux": "^7.1.1",
+"react-router-dom": "^5.0.1",
+"react-scripts": "3.1.2",
+"redux": "^4.0.4",
+"redux-thunk": "^2.3.0",
+"semantic-ui-css": "^2.4.1",
+"semantic-ui-react": "^0.88.1",
+"styled-components": "^4.4.0",
+"yup": "^0.27.0"
+}
+```
+## Examples of Tables
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The "users" table looks like this:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+"username": "demo",
+"password": "123456",
+```
 
-### Code Splitting
+The "Add New Campaign" table look like this:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```
+"campaign_name": "Awesome projcet"
+"campaign_category": "Software"
+"Fundraising Goal: "100000"
+"Country: "United State"
+"Duration: "45 days"
+"Description": "This is an awesome project!"
 
-### Analyzing the Bundle Size
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Endpoint Usage
 
-### Making a Progressive Web App
+**POST** - Register a new user
+\*\*\* Requires a username, and password
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+https://kickstarter-backend.herokuapp.com/api/auth/register
 
-### Advanced Configuration
+**POST** - Login a registered user. Also provides Web Token.
+\*\*\* Requires username and password
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+https://kickstarter-backend.herokuapp.com/api/auth/login
 
-### Deployment
+**GET** - Returns all campaigns
+\*\*\* Requires JSON Web Token
+https://kickstarter-backend.herokuapp.com/api//kickstarter/user/:user_id
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
 
-### `npm run build` fails to minify
+**POST** - Adds a new campaign
+\*\*\* Requires JSON Web Token and a data object
+https://kickstarter-backend.herokuapp.com/api//kickstarter/user/:user_id
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**PUT** - Edits a campaign with the selected id
+\*\*\* Requires JSON Web Token and a data object
+https://kickstarter-backend.herokuapp.com/api//kickstarter/:id
+
+**DELETE** - Deletes a campaign with the selected id
+\*\*\* Requires JSON Web Token
+https://kickstarter-backend.herokuapp.com/api//kickstarter/:id
+
+## Support
+
+There is currently no active support for this app
+
+## Authors and acknowledgment
+
+**UI Engineers**:
+Ethan Hoover (https://github.com/Cireimu)
+
+**Front End Engineers**:
+Uzias Rivera (https://github.com/uziasr)
+Richany Alina Nguon (https://github.com/richanynguon)
+
+**Front End Framework Engineer**:
+Jojo Zhang (https://github.com/nomadkitty)
+
+**Backend Engineer**:
+Timothy McGowen (https://github.com/mcgowent)
+
+**Data Scientist**
+Jordan Ireland (https://github.com/Jordan-Ireland)
+John Morrison (https://github.com/JohnMorrisonn)
+Elizabeth Ter Sahakyan (https://github.com/elizabethts)
+
+**Project Lead**
+Gustavo Isturiz (https://github.com/orgs/Kickstarter-Success/people/gisturiz)
+
+**Full Repo**:
+https://github.com/Kickstarter-Success
+
+## Project status
+
+This project was completed for a Lambda School build week September 2019. There may be updates to the application periodically
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

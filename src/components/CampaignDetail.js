@@ -178,7 +178,8 @@ const CampaignDetail = (props) => {
                 <p>See how your goal compares to the average raised in your category and others! Aim to keep your goal in the average range of the successful campaigns in your chosen category</p>
                 <Iframe url={url.graph2} height='500px' width='800px' className='chartGraph'/>
             </div>
-        </Campaign>
+        </div>
+    </Campaign>
     )
 };
 

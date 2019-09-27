@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import { getCampaigns, grabCampaign, deleteCampaign, getDataUrl } from '../store/actions/campaignAction';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
-import {H1, ColoredButton, Card, H2, H3} from './style';
+import {H1, ColoredButton, Card, H2, H3, P} from './style';
+import tag from '../imgs/tag.png';
+import location from '../imgs/location.png';
 import Iframe from 'react-iframe';
 
 const Campaign = styled.div`
@@ -20,6 +22,62 @@ align-items: center;
 align-content: center;
 padding: 8% 0 10% 0;
 `
+const Box1 = styled.div`
+padding: 35px;
+background: #abd7c4ff;
+box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+border-radius: 10px;
+@media all and (max-width: 768px) {
+    padding: 25px;
+    }
+`
+const Box2 = styled.div`
+padding: 35px;
+background: #48c891ff;
+box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+border-radius: 10px;
+@media all and (max-width: 768px) {
+    padding: 25px;
+    }
+`
+const CampaignTitle = styled.div`
+width: 50%;
+display:flex;
+justify-content: flex-start;
+align-items: flex-start;
+flex-direction: column;
+H1{
+    margin-bottom: 0;
+}
+P{
+    font-size: 18px;
+    margin:3%;
+}
+div{
+    display:flex;
+    align-items: center;
+}
+`
+const BoxWrap = styled.div`
+display: flex;
+justify-content: space-evenly;
+align-items:baseline;
+width: 35%;
+div{
+    P{
+        font-size: 16px;
+    } 
+}
+div{
+    H1{
+        font-size: 24px;
+    }
+
+}
+`
+const Icon = styled.img`
+width: 40px;
+`;
 
 
 const CampaignDetail = (props) => {
@@ -53,20 +111,33 @@ const CampaignDetail = (props) => {
     return(
         <Campaign>
             <Card>
-                <H1>{campaign.campaignName}</H1>
-                <H2>{campaign.description}</H2>
                 <Details>
-                    <div>
-                        <H3>Industry:  {campaign.categories}</H3>
-                        <H3>Country:  {campaign.country}</H3>
-                    </div>
-                    <div>
-                        <H3>Goal:  {campaign.monetaryGoal}</H3>
-                        <H3>Length:  {campaign.duration}</H3>
-                    </div>
+                    <CampaignTitle>
+                        <H1>{campaign.campaignName}</H1>
+                        <P>{campaign.description}</P>
+                        <div className='tag'>
+                            <Icon src={tag} alt='tag'/>
+                            <p>{campaign.categories}</p>
+                        </div>
+                        <div>
+                            <Icon src={location} alt='location'/>
+                            <p>{campaign.country}</p>
+                        </div>
+                    </CampaignTitle>
+                    <BoxWrap>
+                        <div>
+                            <Box1><H1>${campaign.monetaryGoal}<br/> goal</H1></Box1>
+                        </div>
+                        <div><P>In</P></div>
+                        <div>
+                            <Box2><H1>{campaign.duration} <br/> days</H1></Box2>
+                            {/* <Box2><H3>Industry:  {campaign.categories}</H3></Box2>
+                            <Box2><H3>Country:  {campaign.country}</H3></Box2> */}
+                        </div>
+                    </BoxWrap>
                 </Details>
                 <ButtonWrapper>
-                    <ColoredButton small onClick={()=>grabCampaign(campaign, history)}>Edit</ColoredButton>
+                    <ColoredButton big onClick={()=>grabCampaign(campaign, history)}>EDIT</ColoredButton>
                     <ColoredButton small  onClick={()=>deleteCampaign(campaign.id, history)}>Delete</ColoredButton>
                 </ButtonWrapper>
             </Card>

@@ -5,7 +5,6 @@ import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 import {H1, ColoredButton, Card, H2, H3} from './style';
 import Iframe from 'react-iframe';
-import axios from 'axios';
 
 const Campaign = styled.div`
    margin-top:8%;

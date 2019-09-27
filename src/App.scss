@@ -21,18 +21,16 @@
   color: #09d3ac;
 }
 
-.nav{
+.nav {
   font-weight: 900;
-	font-size: 18px;
-	color: white;
-	text-decoration: none;
-	margin-left: 30px;
-
+  font-size: 18px;
+  color: white;
+  text-decoration: none;
+  margin-left: 30px;
 }
 
 .nav:hover {
   transform: scale(1.1);
-
 }
 
 .nav:active {
@@ -40,7 +38,7 @@
   color: white;
 }
 
-.logout{
+.logout {
   display: flex;
   width: 300px;
 }
@@ -48,13 +46,15 @@
 .chartBox2 {
   background: linear-gradient(90.4deg, #74d5ab 0.21%, #abd7c4 99.73%);
   padding: 50px;
-    h1 {
-      font-size: 40px;
-      font-weight: bold;
-    }
-    h3 {
-      font-size: 20px;
-    }
+  h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  h3 {
+    font-size: 20px;
+    margin: 20px 0;
+  }
 }
 
 .chartBox1 {
@@ -62,17 +62,21 @@
   h1 {
     font-size: 40px;
     font-weight: bold;
+    margin: 20px 0;
   }
   h3 {
     font-size: 20px;
+    margin: 20px 0;
   }
 }
 .chartGraph {
   margin: 0 auto;
+  // box-shadow: 5px 5px;
+
 }
 
 .graph {
-  padding: 0 auto;
+  margin: 0 auto;
 }
 
 .bottomWord {

@@ -57,7 +57,7 @@ This project was created using yarn and designed for react client side. Other de
 "semantic-ui-react": "^0.88.1",
 "styled-components": "^4.4.0",
 "yup": "^0.27.0"
-}
+
 ```
 ## Examples of Tables
 

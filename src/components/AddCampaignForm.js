@@ -23,11 +23,18 @@ width: 100%;
 `;
 const Div = styled.div`
 display:flex;
-justify-content: space-evenly;
-width:60%;
+justify-content: space-around;
+width:70%;
 margin: 0 auto;
 align-content: center;
 align-items:baseline ;
+input{
+	width:90%;
+}
+.days{
+	text-align:right;
+	width:80%;
+}
 
 `;
 
@@ -73,7 +80,7 @@ function AddCampaignForm({ status, values, ...props }) {
 				</IWChild>
 				<IWChild>
 				<Div>
-						<H2>$: </H2>
+						<H2>$</H2>
 					<Field className='inputForm' type='number' name='monetaryGoal' placeholder='Fundraising Goal' />
 				</Div>
 					<ErrorMessage name='monetaryGoal'>{msg => <P fail>{msg}</P>}</ErrorMessage>
@@ -91,13 +98,13 @@ function AddCampaignForm({ status, values, ...props }) {
 				
 				<IWChild>
 				<Div>
-				<H2 classname='days'>Days: </H2>
-					<Field
-						className='inputForm'
-						type='number'
-						name='duration'
-						placeholder='Duration'
-					/>
+						<Field
+							className='inputForm days'
+							type='number'
+							name='duration'
+							placeholder='Duration'
+						/>
+						<H2 classname='days'>Days</H2>
 					</Div>
 					<ErrorMessage name='duration'>{msg => <P fail>{msg}</P>}</ErrorMessage>
 				</IWChild>

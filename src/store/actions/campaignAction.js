@@ -72,6 +72,7 @@ export const getCampaigns = (user_id) => dispatch => {
   axiosWithAuth()
     .get(`/kickstarter/user/${user_id}`)
     .then(res => {
+      console.log(res.data)
       dispatch({ type: GET_CAMPAIGN_SUCCESS, payload: res.data })
     })
     .catch(err => {
@@ -85,7 +86,8 @@ export const getDataUrl = (id) => dispatch => {
   axiosWithAuth()
     .get(`/kickstarter/visualizations/${id}`)
     .then(res => {
-      dispatch({ type: GET_CAMPAIGN_SUCCESS, payload: res.data })
+      console.log(res)
+      dispatch({ type: GET_DATAURL_SUCCESS, payload: res.data })
     })
     .catch(err => {
       dispatch({ type: GET_DATAURL_FAILURE, payload: err.response })

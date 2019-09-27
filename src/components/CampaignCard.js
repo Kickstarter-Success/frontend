@@ -113,7 +113,8 @@ export default function CampaignCard(props) {
 		categories,
 		monetaryGoal,
 		duration,
-		country
+		country,
+		result
 	} = props.campaign;
 	return (
 		<>
@@ -138,7 +139,7 @@ export default function CampaignCard(props) {
 					<DayText>{duration} days</DayText>
 				</OutcomeDiv>
 				<StyledDiv>
-					<Success>Success</Success>
+					<Success>{result===1 ? 'Success': 'Fail'}</Success>
 					<Link to={`/dashboard/campaign/${id}`}>
 						<WhiteButton className='nav' mediumbrand>View Results
 						</WhiteButton>

@@ -15,15 +15,6 @@ const Campaign = styled.div`
        flex-direction: column;
    }
 `;
-// const ButtonWrapper = styled.div`
-// display:flex;
-// justify-content: flex-end;
- 
-// button{
-//     color:black;
-//     margin: 0 2%;
-// }
-// `
 
 const Details = styled.div`
 background: white;
@@ -256,25 +247,27 @@ const CampaignDetail = (props) => {
                         </div>
                     </BoxWrap>
                 </Details>
-
-            </div>          
-         
-                <ButtonWrapper>
-                    <EditButton big onClick={()=>grabCampaign(campaign, history)}>EDIT CAMPAIGN</EditButton>
-                    <ColoredButton big  onClick={()=>deleteCampaign(campaign.id, history)}>DELETE CAMPAIGN</ColoredButton>
-                </ButtonWrapper>
-
-            </div>          
+            </div>                   
            
-            <BodyText>
-            <div>
-                <Iframe url={url.graph3} height='300px' width='100%' className='rainbowGraph'/>
+            <div className='graph'>
+                <Iframe url={url.graph3} height='350px' width='100%' className='rainbowGraph'/>
             </div>
+           
+            <div className='chartBox2'>
+                <h1>Backers and Goals</h1>
+                <h3>How many backers should you expect to have for your campaign to be successful? Find yourself in blue and set your goals accordingly to achieve success!</h3>
+                <Iframe url={url.graph2} height='850px' width='60%' className='chartGraph'/>
+            </div>
+            <div className='chartBox1'>
+                <h1>Categories and Goals</h1>
+                <h3>See how your goal compares to the average raised in your category and others! Aim to keep your goal in the average range of the successful campaigns in your chosen category</h3>
+                <Iframe url={url.graph1} height='500px' width='60%' className='chartGraph'/>
+            </div>
+            <BodyText>
             <div>
                 <H2>A little stats never hurt nobody!</H2>
                 <p>See how your campaign compares to others with similar goals and categories.</p>
             </div>
-  
                 <div className='topText'>
                     <TextBox className='one'><Bold>{campaign.raising_more_success}</Bold><br/>campaigns raising more than <B>${campaign.monetaryGoal}</B> have been successful</TextBox>
                     <TextBox className='two'><Bold>{campaignSuccess}%</Bold><br/> of campaigns in the <B>{campaign.categories}</B> category have been successful</TextBox>
@@ -286,17 +279,6 @@ const CampaignDetail = (props) => {
                     <TextBox className='six'>Successful campaigns in the <B>{campaign.categories}</B> category have an average duration of <Bold>{averageDays}</Bold> day</TextBox>
                 </div>
             </BodyText>
-            <div className='chartBox2'>
-                <h1>Backers and Goals</h1>
-                <h3>How many backers should you expect to have for your campaign to be successful? Find yourself in blue and set your goals accordingly to achieve success!</h3>
-                <Iframe url={url.graph2} height='850px' width='60%' className='chartGraph'/>
-            </div>
-            <div className='chartBox1'>
-                <h1>Categories and Goals</h1>
-                <h3>See how your goal compares to the average raised in your category and others! Aim to keep your goal in the average range of the successful campaigns in your chosen category</h3>
-                <Iframe url={url.graph1} height='500px' width='60%' className='chartGraph'/>
-            </div>
-        
     </Campaign>
     )
 };

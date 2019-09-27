@@ -110,7 +110,7 @@ width:100%;
 .topText{
     display:flex;
     justify-content: center;
-    margin: 2% 0;
+    margin: 1.5% 0;
     width: 80%;
     .one{
         background-color:#abd7c4ff;
@@ -128,7 +128,7 @@ width:100%;
 .bottomText{
     display:flex;
     justify-content: center;
-    margin-bottom: 2%;
+    margin-bottom: 5%;
     width: 80%;
     .four{
         background-color: #48c891ff;
@@ -149,14 +149,15 @@ const TextBox = styled.div`
     flex-direction: column;
     justify-content: center;
     width: 30%;
-    height: 300px;
+    height: 290px;
     font-size: 28px;
     align-items: center;
-    padding: 4rem%;
+    padding: 4rem;
     text-align: center;
     font-weight: 400;
     line-height: 30px;
     background:green;
+    font-size: 24px;
     // box-shadow: -1px 3px 5px -1px rgba
     `
 
@@ -175,10 +176,12 @@ const Bold = styled.div`
 font-size: 40px;
 font-weight: 900;
 font-family: Prata;
+font-size: 50px;
 `
 const B = styled.b`
     font-weight: 900;
     font-family: Prata;
+    font-size: 30px;
     `
 
 const Icon = styled.img`

@@ -37,14 +37,21 @@ margin: 3%;
 padding: 2% 0;
 `
 const Box1 = styled.div`
-padding: 35px;
+padding: 60px;
+// height: 100px;
+// width: 200px;
+// font-align: center;
 background: #abd7c4ff;
+font-family:'Prata', serif;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-border-radius: 10px;
+border-radius: 2px;
+
 @media all and (max-width: 768px) {
     padding: 25px;
     }
 `
+
+
 const Box2 = styled(Box1)`
 background: #48c891ff;`
 
@@ -59,7 +66,7 @@ H1{
 }
 P{
     font-size: 18px;
-    margin:3%;
+    margin:5%;
     
 }
 div{
@@ -84,11 +91,52 @@ div{
 
 }
 `
+const Gauge = styled.div`
+margin: 0 auto;
+display:flex;
+justify-content: center;`
+
+
+
+const BodyText = styled.div`
+display: flex;
+flex-direction: column;
+align-items:center;
+align-content: center;
+margin: 0 auto;
+.topText{
+    align-self:center;
+    display:flex;
+}
+.bottomText{
+    display:flex;
+}   
+`
+const TextBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 25%;
+    height: 250px;
+    font-size: 28px;
+    align-items: center;
+    padding: 4rem%;
+    text-align: center;
+    font-weight: 400;
+    line-height: 30px;
+    background:green;
+    // box-shadow: -1px 3px 5px -1px rgba
+    `
+
+
+
 const Icon = styled.img`
 width: 40px;
 `;
 
-
+const EditButton = styled(ColoredButton)`
+background-color: #abd7c4ff;
+`
 const CampaignDetail = (props) => {
     const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history, isLoading, getDataUrl } = props
     const [campaign, setCampaign] = useState({});
@@ -151,24 +199,28 @@ const CampaignDetail = (props) => {
                     </BoxWrap>
                 </Details>
                 <ButtonWrapper>
-                    <ColoredButton big onClick={()=>grabCampaign(campaign, history)}>EDIT CAMPAIGN</ColoredButton>
+                    <EditButton big onClick={()=>grabCampaign(campaign, history)}>EDIT CAMPAIGN</EditButton>
                     <ColoredButton big  onClick={()=>deleteCampaign(campaign.id, history)}>DELETE CAMPAIGN</ColoredButton>
                 </ButtonWrapper>
             </div>          
-            <p>Your campaign will be a {campaign.result===1 ? 'success' : 'fail'}!</p>
-            <div>
+            {/* <p>Your campaign will be a {campaign.result===1 ? 'success' : 'fail'}!</p> */}
+            <Gauge>
                 <Iframe url='https://jbti-kickstarter-success.s3.us-east-2.amazonaws.com/visualizations/visual3-1.html' height='500px' width='600px' className='rainbowGraph'/>
-            </div>
-            <div>
+            </Gauge>
+            <BodyText>
                 <H2>A little stats never hurt nobody!</H2>
                 <p>See how your campaign compares to others with similar goals and categories.</p>
-                <p>{campaign.raising_more_success} campaigns raising more than ${campaign.monetaryGoal} have been successful</p>
-                <p>{campaignSuccess}% of campaigns in the {campaign.categories} category have been successful</p>
-                <p>Campaigns in the {campaign.categories} category raise an average of ${campaignAverage}K successfully</p>
-                <p>Successful campaigns raising more than  {campaign.monetaryGoal} raise an average of ${averageOver}K above their goal!</p>
-                <p>Successful campaigns raising {campaign.monetaryGoal} have an average of {averageBacker} backers</p>
-                <p>Successful campaigns in the {campaign.categories} category have an average duration of {averageDays} day</p>
-            </div>
+                <div className='topText'>
+                    <TextBox>{campaign.raising_more_success}<br/> campaigns raising more than ${campaign.monetaryGoal} have been successful</TextBox>
+                    <TextBox>{campaignSuccess}% of campaigns in the {campaign.categories} category have been successful</TextBox>
+                    <TextBox>Campaigns in the {campaign.categories} category raise an average of ${campaignAverage}K successfully</TextBox>
+                </div>
+                <div className='bottomText'>
+                    <p>Successful campaigns raising more than  {campaign.monetaryGoal} raise an average of ${averageOver}K above their goal!</p>
+                    <p>Successful campaigns raising {campaign.monetaryGoal} have an average of {averageBacker} backers</p>
+                    <p>Successful campaigns in the {campaign.categories} category have an average duration of {averageDays} day</p>
+                </div>
+            </BodyText>
             <div>
                 <H1>Explore the dataset</H1>
                 <H3>Hover, click, drag, zoom to see all of the data points included in our model. </H3>

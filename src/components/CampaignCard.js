@@ -116,7 +116,7 @@ export default function CampaignCard(props) {
 		country,
 		prediction_results
 	} = props.campaign;
-	console.log(props.campaign)
+	
 	return (
 		<>
 			<CustomCard>

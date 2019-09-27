@@ -90,9 +90,9 @@ width: 40px;
 
 
 const CampaignDetail = (props) => {
-    const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history, isLoading, getDataUrl } = props
+    const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history, isLoading, getDataUrl, url } = props
     const [campaign, setCampaign] = useState({});
-    const [dataUrl, setDataUrl] =useState();
+    // const [dataUrl, setDataUrl] =useState({});
     const user_id = localStorage.getItem('user_id')
 
     useEffect(()=>{
@@ -100,9 +100,10 @@ const CampaignDetail = (props) => {
         const campaignToDisplay = campaigns.find(campaignInList => `${campaignInList.id}` === match.params.id)
         if (campaignToDisplay) {
             setCampaign(campaignToDisplay);
-            setDataUrl(getDataUrl(campaignToDisplay.id))
+            getDataUrl(campaignToDisplay.id)
         };
-    },[campaigns, match])
+    },[campaigns, match, getDataUrl])
+    // console.log(dataUrl)
     
     const campaignSuccess = Math.round(campaign.category_success*100)
     const campaignAverage = Math.round(campaign.category_average/1000)
@@ -113,7 +114,7 @@ const CampaignDetail = (props) => {
     if(isLoading) {
 		return (
 		<>
-		<Loader type='Puff' color='#05ce78' height={60} width={60}/>
+		<Loader type='Puff' color='#05ce78' height={200} width={200}/>
 		</>)
 	}
     
@@ -154,10 +155,8 @@ const CampaignDetail = (props) => {
                     <ColoredButton big onClick={()=>grabCampaign(campaign, history)}>EDIT CAMPAIGN</ColoredButton>
                     <ColoredButton big  onClick={()=>deleteCampaign(campaign.id, history)}>DELETE CAMPAIGN</ColoredButton>
                 </ButtonWrapper>
-            </div>          
-            <p>Your campaign will be a {campaign.result===1 ? 'success' : 'fail'}!</p>
             <div>
-                <Iframe url='https://jbti-kickstarter-success.s3.us-east-2.amazonaws.com/visualizations/visual3-1.html' height='500px' width='600px' className='rainbowGraph'/>
+                <Iframe url={url.graph3} height='500px' width='600px' className='rainbowGraph'/>
             </div>
             <div>
                 <H2>A little stats never hurt nobody!</H2>
@@ -172,12 +171,12 @@ const CampaignDetail = (props) => {
             <div>
                 <H1>Explore the dataset</H1>
                 <H3>Hover, click, drag, zoom to see all of the data points included in our model. </H3>
-                <Iframe url='https://jbti-kickstarter-success.s3.us-east-2.amazonaws.com/visualizations/visual1-1.html' height='500px' width='600px' className='chartGraph'/>
+                <Iframe url={url.graph1} height='500px' width='600px' className='chartGraph'/>
             </div>
             <div>
                 <H1>Categories and Goals</H1>
                 <p>See how your goal compares to the average raised in your category and others! Aim to keep your goal in the average range of the successful campaigns in your chosen category</p>
-                <Iframe url='https://jbti-kickstarter-success.s3.us-east-2.amazonaws.com/visualizations/visual1-1.html' height='500px' width='600px' className='chartGraph'/>
+                <Iframe url={url.graph2} height='500px' width='800px' className='chartGraph'/>
             </div>
         </Campaign>
     )

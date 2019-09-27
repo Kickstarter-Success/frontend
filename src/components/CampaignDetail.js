@@ -264,9 +264,9 @@ const CampaignDetail = (props) => {
                 <Iframe url={url.graph1} height='500px' width='60%' className='chartGraph'/>
             </div>
             <BodyText>
-            <div>
-                <H2>A little stats never hurt nobody!</H2>
-                <p>See how your campaign compares to others with similar goals and categories.</p>
+            <div className='bottomWord'>
+                <h1>A little stats never hurt nobody!</h1>
+                <h3>See how your campaign compares to others with similar goals and categories.</h3>
             </div>
                 <div className='topText'>
                     <TextBox className='one'><Bold>{campaign.raising_more_success}</Bold><br/>campaigns raising more than <B>${campaign.monetaryGoal}</B> have been successful</TextBox>

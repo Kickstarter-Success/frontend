@@ -193,7 +193,7 @@ const CampaignDetail = (props) => {
             setCampaign(campaignToDisplay);
             getDataUrl(campaignToDisplay.id)
         };
-    },[campaigns, match, getDataUrl])
+    },[campaigns, match])
     
     const campaignSuccess = Math.round(campaign.category_success*100)
     const campaignAverage = Math.round(campaign.category_average/1000)

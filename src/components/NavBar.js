@@ -42,9 +42,6 @@ const ButtonNoStyle = styled.a`
   transform: scale(1.1);
   color: white;
 }
-
-
-
 `;
 
 const LogoText = styled.a`
@@ -61,12 +58,7 @@ const LogoText = styled.a`
 &:active {
   transform: scale(1.1);
   color: white;
-}
-
-
-
-
-  
+} 
 `;
 const NavBar = props => {
 	return (

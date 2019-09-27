@@ -9,18 +9,32 @@ import location from '../imgs/location.png';
 import Iframe from 'react-iframe';
 
 const Campaign = styled.div`
-   margin-top:8%;
+   margin-top:3%;
+   .Campaignheader{
+       display:flex;
+       
+       flex-direction: column;
+   }
 `;
 const ButtonWrapper = styled.div`
 display:flex;
-justify-content: space-around; `
+justify-content: center;
+ 
+button{
+    color:black;
+    margin: 0 2%;
+}
+`
 
 const Details = styled.div`
+background: white;
 display:flex;
 justify-content: space-around;
-align-items: center; 
+align-items:center; 
 align-content: center;
-padding: 8% 0 10% 0;
+width: 90%;
+margin: 3%;
+padding: 2% 0;
 `
 const Box1 = styled.div`
 padding: 35px;
@@ -31,15 +45,9 @@ border-radius: 10px;
     padding: 25px;
     }
 `
-const Box2 = styled.div`
-padding: 35px;
-background: #48c891ff;
-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-border-radius: 10px;
-@media all and (max-width: 768px) {
-    padding: 25px;
-    }
-`
+const Box2 = styled(Box1)`
+background: #48c891ff;`
+
 const CampaignTitle = styled.div`
 width: 50%;
 display:flex;
@@ -52,6 +60,7 @@ H1{
 P{
     font-size: 18px;
     margin:3%;
+    
 }
 div{
     display:flex;
@@ -65,7 +74,7 @@ align-items:baseline;
 width: 35%;
 div{
     P{
-        font-size: 16px;
+        font-size: 24px;
     } 
 }
 div{
@@ -110,18 +119,23 @@ const CampaignDetail = (props) => {
     
     return(
         <Campaign>
-            <Card>
+                <H1>Campaign Results</H1>
+                <div className='Campaignheader'>
                 <Details>
                     <CampaignTitle>
                         <H1>{campaign.campaignName}</H1>
                         <P>{campaign.description}</P>
-                        <div className='tag'>
-                            <Icon src={tag} alt='tag'/>
-                            <p>{campaign.categories}</p>
-                        </div>
                         <div>
-                            <Icon src={location} alt='location'/>
-                            <p>{campaign.country}</p>
+                            <div>
+                                <div className='tag'>
+                                    <Icon src={tag} alt='tag'/>
+                                    <p>{campaign.categories}</p>
+                                </div>
+                                <div>
+                                    <Icon src={location} alt='location'/>
+                                    <p>{campaign.country}</p>
+                                </div>
+                            </div>
                         </div>
                     </CampaignTitle>
                     <BoxWrap>
@@ -137,10 +151,10 @@ const CampaignDetail = (props) => {
                     </BoxWrap>
                 </Details>
                 <ButtonWrapper>
-                    <ColoredButton big onClick={()=>grabCampaign(campaign, history)}>EDIT</ColoredButton>
-                    <ColoredButton small  onClick={()=>deleteCampaign(campaign.id, history)}>Delete</ColoredButton>
+                    <ColoredButton big onClick={()=>grabCampaign(campaign, history)}>EDIT CAMPAIGN</ColoredButton>
+                    <ColoredButton big  onClick={()=>deleteCampaign(campaign.id, history)}>DELETE CAMPAIGN</ColoredButton>
                 </ButtonWrapper>
-            </Card>
+            </div>          
             <p>Your campaign will be a {campaign.result===1 ? 'success' : 'fail'}!</p>
             <div>
                 <Iframe url='https://jbti-kickstarter-success.s3.us-east-2.amazonaws.com/visualizations/visual3-1.html' height='500px' width='600px' className='rainbowGraph'/>

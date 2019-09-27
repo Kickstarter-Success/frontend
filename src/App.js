@@ -10,7 +10,7 @@ import FormikAddCampaignForm from './components/AddCampaignForm';
 import Dashboard from './components/Dashboard';
 import CampaignDetail from './components/CampaignDetail';
 
-import './App.css';
+import './App.scss';
 
 function App() {
   return (

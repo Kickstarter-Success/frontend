@@ -92,7 +92,6 @@ width: 40px;
 const CampaignDetail = (props) => {
     const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history, isLoading, getDataUrl, url } = props
     const [campaign, setCampaign] = useState({});
-    // const [dataUrl, setDataUrl] =useState({});
     const user_id = localStorage.getItem('user_id')
 
     useEffect(()=>{
@@ -103,7 +102,6 @@ const CampaignDetail = (props) => {
             getDataUrl(campaignToDisplay.id)
         };
     },[campaigns, match, getDataUrl])
-    // console.log(dataUrl)
     
     const campaignSuccess = Math.round(campaign.category_success*100)
     const campaignAverage = Math.round(campaign.category_average/1000)
@@ -156,7 +154,7 @@ const CampaignDetail = (props) => {
                     <ColoredButton big  onClick={()=>deleteCampaign(campaign.id, history)}>DELETE CAMPAIGN</ColoredButton>
                 </ButtonWrapper>
             <div>
-                <Iframe url={url.graph3} height='500px' width='600px' className='rainbowGraph'/>
+                <Iframe url={url.graph3} height='300px' width='100%' className='rainbowGraph'/>
             </div>
             <div>
                 <H2>A little stats never hurt nobody!</H2>
@@ -168,15 +166,15 @@ const CampaignDetail = (props) => {
                 <p>Successful campaigns raising {campaign.monetaryGoal} have an average of {averageBacker} backers</p>
                 <p>Successful campaigns in the {campaign.categories} category have an average duration of {averageDays} day</p>
             </div>
-            <div>
-                <H1>Explore the dataset</H1>
-                <H3>Hover, click, drag, zoom to see all of the data points included in our model. </H3>
-                <Iframe url={url.graph1} height='500px' width='600px' className='chartGraph'/>
+            <div className='chartBox2'>
+                <h1>Backers and Goals</h1>
+                <h3>How many backers should you expect to have for your campaign to be successful? Find yourself in blue and set your goals accordingly to achieve success!</h3>
+                <Iframe url={url.graph2} height='850px' width='60%' className='chartGraph'/>
             </div>
-            <div>
-                <H1>Categories and Goals</H1>
-                <p>See how your goal compares to the average raised in your category and others! Aim to keep your goal in the average range of the successful campaigns in your chosen category</p>
-                <Iframe url={url.graph2} height='500px' width='800px' className='chartGraph'/>
+            <div className='chartBox1'>
+                <h1>Categories and Goals</h1>
+                <h3>See how your goal compares to the average raised in your category and others! Aim to keep your goal in the average range of the successful campaigns in your chosen category</h3>
+                <Iframe url={url.graph1} height='500px' width='60%' className='chartGraph'/>
             </div>
         </div>
     </Campaign>

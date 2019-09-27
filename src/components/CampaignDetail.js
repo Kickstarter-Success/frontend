@@ -9,22 +9,21 @@ import location from '../imgs/location.png';
 import Iframe from 'react-iframe';
 
 const Campaign = styled.div`
-   margin-top:3%;
    .Campaignheader{
        display:flex;
        
        flex-direction: column;
    }
 `;
-const ButtonWrapper = styled.div`
-display:flex;
-justify-content: center;
+// const ButtonWrapper = styled.div`
+// display:flex;
+// justify-content: flex-end;
  
-button{
-    color:black;
-    margin: 0 2%;
-}
-`
+// button{
+//     color:black;
+//     margin: 0 2%;
+// }
+// `
 
 const Details = styled.div`
 background: white;
@@ -32,12 +31,12 @@ display:flex;
 justify-content: space-around;
 align-items:center; 
 align-content: center;
-width: 90%;
-margin: 3%;
-padding: 2% 0;
+width: 95%;
+margin: .5% auto;
+padding: 2% 0 0 0;
 `
 const Box1 = styled.div`
-padding: 60px;
+padding: 50px;
 // height: 100px;
 // width: 200px;
 // font-align: center;
@@ -91,10 +90,17 @@ div{
 
 }
 `
+const TagWrapper = styled.div`
+width: 100%;
+display:flex;
+justify-content: space-between;
+`
+
 const Gauge = styled.div`
 margin: 0 auto;
 display:flex;
-justify-content: center;`
+justify-content: center;
+`
 
 
 
@@ -104,20 +110,50 @@ flex-direction: column;
 align-items:center;
 align-content: center;
 margin: 0 auto;
+width:100%;
 .topText{
-    align-self:center;
     display:flex;
+    justify-content: center;
+    margin: 2% 0;
+    width: 80%;
+    .one{
+        background-color:#abd7c4ff;
+        box-shadow: -1px 3px 5px -1px rgba(0, 0, 0, 0.85);
+    }
+    .two{
+        background-color:#74d5abff;
+        box-shadow: -1px 3px 5px -1px rgba(0, 0, 0, 0.85);
+    }
+    .three{
+        background-color: #48c891ff;
+        box-shadow: -1px 3px 5px -1px rgba(0, 0, 0, 0.85);
+    }
 }
 .bottomText{
     display:flex;
+    justify-content: center;
+    margin-bottom: 2%;
+    width: 80%;
+    .four{
+        background-color: #48c891ff;
+        box-shadow: -1px 3px 5px -1px rgba(0, 0, 0, 0.85);
+    }
+    .five{
+        background-color: #05ce78ff;
+        box-shadow: -1px 3px 5px -1px rgba(0, 0, 0, 0.85);
+    }
+    .six{
+        background-color: #74d5abff;
+        box-shadow: -1px 3px 5px -1px rgba(0, 0, 0, 0.85);
+    }
 }   
 `
 const TextBox = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 25%;
-    height: 250px;
+    width: 30%;
+    height: 300px;
     font-size: 28px;
     align-items: center;
     padding: 4rem%;
@@ -128,7 +164,24 @@ const TextBox = styled.div`
     // box-shadow: -1px 3px 5px -1px rgba
     `
 
-
+const UDButton =styled.div`
+display: flex;
+justify-content: space-between;
+margin-right: 6%;
+div{
+    margin: 0 5%;
+    button{
+        color:black;
+    }
+}
+`
+const Bold = styled.div`
+font-size: 40px;
+font-weight: 900;
+`
+const B = styled.b`
+    font-weight: 900;
+    `
 
 const Icon = styled.img`
 width: 40px;
@@ -172,7 +225,7 @@ const CampaignDetail = (props) => {
                     <CampaignTitle>
                         <H1>{campaign.campaignName}</H1>
                         <P>{campaign.description}</P>
-                        <div>
+                        <TagWrapper>
                             <div>
                                 <div className='tag'>
                                     <Icon src={tag} alt='tag'/>
@@ -183,7 +236,15 @@ const CampaignDetail = (props) => {
                                     <p>{campaign.country}</p>
                                 </div>
                             </div>
-                        </div>
+                                <UDButton>
+                                <div>
+                                    <EditButton small onClick={()=>grabCampaign(campaign, history)}>EDIT</EditButton>
+                                </div>
+                                <div>
+                                    <ColoredButton small  onClick={()=>deleteCampaign(campaign.id, history)}>DELETE</ColoredButton>
+                                </div>
+                            </UDButton>
+                        </TagWrapper>
                     </CampaignTitle>
                     <BoxWrap>
                         <div>
@@ -195,6 +256,9 @@ const CampaignDetail = (props) => {
                         </div>
                     </BoxWrap>
                 </Details>
+
+            </div>          
+         
                 <ButtonWrapper>
                     <EditButton big onClick={()=>grabCampaign(campaign, history)}>EDIT CAMPAIGN</EditButton>
                     <ColoredButton big  onClick={()=>deleteCampaign(campaign.id, history)}>DELETE CAMPAIGN</ColoredButton>
@@ -212,14 +276,14 @@ const CampaignDetail = (props) => {
             </div>
   
                 <div className='topText'>
-                    <TextBox>{campaign.raising_more_success}<br/> campaigns raising more than ${campaign.monetaryGoal} have been successful</TextBox>
-                    <TextBox>{campaignSuccess}% of campaigns in the {campaign.categories} category have been successful</TextBox>
-                    <TextBox>Campaigns in the {campaign.categories} category raise an average of ${campaignAverage}K successfully</TextBox>
+                    <TextBox className='one'><Bold>{campaign.raising_more_success}</Bold><br/>campaigns raising more than <B>${campaign.monetaryGoal}</B> have been successful</TextBox>
+                    <TextBox className='two'><Bold>{campaignSuccess}%</Bold><br/> of campaigns in the <B>{campaign.categories}</B> category have been successful</TextBox>
+                    <TextBox className='three'>Campaigns in the <B>{campaign.categories}</B> category raise an average of <Bold>${campaignAverage}K</Bold><br/> successfully</TextBox>
                 </div>
                 <div className='bottomText'>
-                    <p>Successful campaigns raising more than  {campaign.monetaryGoal} raise an average of ${averageOver}K above their goal!</p>
-                    <p>Successful campaigns raising {campaign.monetaryGoal} have an average of {averageBacker} backers</p>
-                    <p>Successful campaigns in the {campaign.categories} category have an average duration of {averageDays} day</p>
+                    <TextBox className='four'>Successful campaigns raising more than  <B>{campaign.monetaryGoal}</B> raise an average of <Bold>${averageOver}K</Bold>above their goal!</TextBox>
+                    <TextBox className='five'>Successful campaigns raising <B>{campaign.monetaryGoal}</B> have an average of <Bold>{averageBacker}</Bold> backers</TextBox>
+                    <TextBox className='six'>Successful campaigns in the <B>{campaign.categories}</B> category have an average duration of <Bold>{averageDays}</Bold> day</TextBox>
                 </div>
             </BodyText>
             <div className='chartBox2'>

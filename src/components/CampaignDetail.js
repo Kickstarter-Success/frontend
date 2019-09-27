@@ -191,9 +191,8 @@ const EditButton = styled(ColoredButton)`
 background-color: #abd7c4ff;
 `
 const CampaignDetail = (props) => {
-    const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history, isLoading, getDataUrl } = props
+    const { getCampaigns, grabCampaign, deleteCampaign, campaigns, match, history, isLoading, getDataUrl, url } = props
     const [campaign, setCampaign] = useState({});
-    const [dataUrl, setDataUrl] =useState();
     const user_id = localStorage.getItem('user_id')
 
     useEffect(()=>{
@@ -201,9 +200,9 @@ const CampaignDetail = (props) => {
         const campaignToDisplay = campaigns.find(campaignInList => `${campaignInList.id}` === match.params.id)
         if (campaignToDisplay) {
             setCampaign(campaignToDisplay);
-            setDataUrl(getDataUrl(campaignToDisplay.id))
+            getDataUrl(campaignToDisplay.id)
         };
-    },[campaigns, match])
+    },[campaigns, match, getDataUrl])
     
     const campaignSuccess = Math.round(campaign.category_success*100)
     const campaignAverage = Math.round(campaign.category_average/1000)
@@ -214,7 +213,7 @@ const CampaignDetail = (props) => {
     if(isLoading) {
 		return (
 		<>
-		<Loader type='Puff' color='#05ce78' height={60} width={60}/>
+		<Loader type='Puff' color='#05ce78' height={200} width={200}/>
 		</>)
 	}
     
@@ -254,19 +253,28 @@ const CampaignDetail = (props) => {
                         <div><P>In</P></div>
                         <div>
                             <Box2><H1>{campaign.duration} <br/> days</H1></Box2>
-                            {/* <Box2><H3>Industry:  {campaign.categories}</H3></Box2>
-                            <Box2><H3>Country:  {campaign.country}</H3></Box2> */}
                         </div>
                     </BoxWrap>
                 </Details>
+
             </div>          
-            {/* <p>Your campaign will be a {campaign.result===1 ? 'success' : 'fail'}!</p> */}
-            <div>
-                <Iframe url='https://jbti-kickstarter-success.s3.us-east-2.amazonaws.com/visualizations/visual3-1.html' height='500px' width='600px' className='rainbowGraph'/>
-            </div>
+         
+                <ButtonWrapper>
+                    <EditButton big onClick={()=>grabCampaign(campaign, history)}>EDIT CAMPAIGN</EditButton>
+                    <ColoredButton big  onClick={()=>deleteCampaign(campaign.id, history)}>DELETE CAMPAIGN</ColoredButton>
+                </ButtonWrapper>
+
+            </div>          
+           
             <BodyText>
+            <div>
+                <Iframe url={url.graph3} height='300px' width='100%' className='rainbowGraph'/>
+            </div>
+            <div>
                 <H2>A little stats never hurt nobody!</H2>
                 <p>See how your campaign compares to others with similar goals and categories.</p>
+            </div>
+  
                 <div className='topText'>
                     <TextBox className='one'><Bold>{campaign.raising_more_success}</Bold><br/>campaigns raising more than <B>${campaign.monetaryGoal}</B> have been successful</TextBox>
                     <TextBox className='two'><Bold>{campaignSuccess}%</Bold><br/> of campaigns in the <B>{campaign.categories}</B> category have been successful</TextBox>
@@ -278,17 +286,18 @@ const CampaignDetail = (props) => {
                     <TextBox className='six'>Successful campaigns in the <B>{campaign.categories}</B> category have an average duration of <Bold>{averageDays}</Bold> day</TextBox>
                 </div>
             </BodyText>
-            <div>
-                <H1>Explore the dataset</H1>
-                <H3>Hover, click, drag, zoom to see all of the data points included in our model. </H3>
-                <Iframe url='https://jbti-kickstarter-success.s3.us-east-2.amazonaws.com/visualizations/visual1-1.html' height='500px' width='600px' className='chartGraph'/>
+            <div className='chartBox2'>
+                <h1>Backers and Goals</h1>
+                <h3>How many backers should you expect to have for your campaign to be successful? Find yourself in blue and set your goals accordingly to achieve success!</h3>
+                <Iframe url={url.graph2} height='850px' width='60%' className='chartGraph'/>
             </div>
-            <div>
-                <H1>Categories and Goals</H1>
-                <p>See how your goal compares to the average raised in your category and others! Aim to keep your goal in the average range of the successful campaigns in your chosen category</p>
-                <Iframe url='https://jbti-kickstarter-success.s3.us-east-2.amazonaws.com/visualizations/visual1-1.html' height='500px' width='600px' className='chartGraph'/>
+            <div className='chartBox1'>
+                <h1>Categories and Goals</h1>
+                <h3>See how your goal compares to the average raised in your category and others! Aim to keep your goal in the average range of the successful campaigns in your chosen category</h3>
+                <Iframe url={url.graph1} height='500px' width='60%' className='chartGraph'/>
             </div>
-        </Campaign>
+        </div>
+    </Campaign>
     )
 };
 

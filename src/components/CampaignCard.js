@@ -114,8 +114,9 @@ export default function CampaignCard(props) {
 		monetaryGoal,
 		duration,
 		country,
-		result
+		prediction_results
 	} = props.campaign;
+	console.log(props.campaign)
 	return (
 		<>
 			<CustomCard>
@@ -139,7 +140,7 @@ export default function CampaignCard(props) {
 					<DayText>{duration} days</DayText>
 				</OutcomeDiv>
 				<StyledDiv>
-					<Success>{result===1 ? 'Success': 'Fail'}</Success>
+					<Success>{prediction_results}% chance of success</Success>
 					<Link to={`/dashboard/campaign/${id}`}>
 						<WhiteButton className='nav' mediumbrand>View Results
 						</WhiteButton>

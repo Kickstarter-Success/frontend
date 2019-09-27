@@ -44,3 +44,29 @@
   display: flex;
   width: 300px;
 }
+
+.chartBox2 {
+  background: linear-gradient(90.4deg, #74d5ab 0.21%, #abd7c4 99.73%);
+  padding: 50px;
+    h1 {
+      font-size: 40px;
+      font-weight: bold;
+    }
+    h3 {
+      font-size: 20px;
+    }
+}
+
+.chartBox1 {
+  padding: 50px;
+  h1 {
+    font-size: 40px;
+    font-weight: bold;
+  }
+  h3 {
+    font-size: 20px;
+  }
+}
+.chartGraph {
+  margin: 0 auto;
+}

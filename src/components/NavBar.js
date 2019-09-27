@@ -72,7 +72,7 @@ const NavBar = props => {
 	return (
 		<StyledNav>
 			<LogoDiv>
-				<LogoStyle src={KICK}></LogoStyle>
+				<a href='https://kickstart-success.netlify.com/index.html'><LogoStyle src={KICK}></LogoStyle></a>
 				<LogoText>Kickstarter Success</LogoText>
 			</LogoDiv>
 			<div>
